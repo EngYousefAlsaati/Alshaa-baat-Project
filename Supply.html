@@ -1,0 +1,1378 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مؤسسة الشعبات للتجارة | Al Shaabat Trading Est - توريد معدات النقل الثقيل والخفيف والمركبات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green-deep:#1f4a2f;
+    --green-mid:#2d5a3d;
+    --green-light:#3d6f4f;
+    --burgundy:#7a2e2e;
+    --burgundy-deep:#5c2020;
+    --burgundy-light:#a04545;
+    --cream:#f5f1e8;
+    --cream-warm:#ede6d3;
+    --paper:#faf7f0;
+    --ink:#1a1f1c;
+    --ink-soft:#3a3f3c;
+    --gold:#c9a14a;
+    --grain: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:'Cairo',sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    line-height:1.7;
+    font-weight:400;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;background:var(--grain);
+    pointer-events:none;z-index:9999;opacity:.4;mix-blend-mode:multiply;
+  }
+  .display{font-family:'Cairo',sans-serif;letter-spacing:-.02em;font-weight:800}
+  .container{max-width:1320px;margin:0 auto;padding:0 24px}
+
+  /* ===== Lang Switcher ===== */
+  .lang-btn{background:none;border:none;color:var(--cream);cursor:pointer;font-family:'Cairo',sans-serif;font-size:13px;opacity:.6;padding:2px 8px;transition:opacity .2s;letter-spacing:.03em}
+  .lang-btn.active{opacity:1;font-weight:700;border-bottom:1.5px solid var(--gold)}
+  .lang-btn:hover{opacity:.9}
+  /* ===== Top Bar ===== */
+  .top-bar{
+    background:var(--ink);color:var(--cream);
+    font-size:13px;padding:8px 0;
+    border-bottom:1px solid rgba(255,255,255,.08);
+  }
+  .top-bar .container{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .top-bar a{color:var(--cream);text-decoration:none;opacity:.85;transition:opacity .2s}
+  .top-bar a:hover{opacity:1}
+  .top-bar .info{display:flex;gap:20px;flex-wrap:wrap}
+  .top-bar .info span{display:inline-flex;align-items:center;gap:6px}
+  .top-bar svg{width:14px;height:14px;opacity:.7}
+
+  /* ===== Header ===== */
+  header{
+    background:var(--paper);
+    position:sticky;top:0;z-index:100;
+    border-bottom:1px solid rgba(0,0,0,.06);
+    transition:box-shadow .3s;
+  }
+  header.scrolled{box-shadow:0 4px 20px rgba(0,0,0,.06)}
+  .nav-wrap{display:flex;align-items:center;justify-content:space-between;padding:18px 0;gap:24px}
+  .logo{display:flex;align-items:center;gap:14px;text-decoration:none;color:inherit}
+  .logo-mark{width:110px;height:110px;flex-shrink:0;object-fit:contain;display:block}
+  .logo-text-wrap{display:flex;flex-direction:column;line-height:1}
+  .logo-ar{font-family:'Cairo',sans-serif;font-size:26px;font-weight:700;color:var(--green-deep);letter-spacing:-.02em}
+  .logo-en{font-family:'Cormorant Garamond',serif;font-size:14px;font-weight:600;color:var(--burgundy);letter-spacing:.12em;margin-top:4px;text-transform:uppercase}
+
+  nav ul{display:flex;gap:6px;list-style:none}
+  nav a{
+    text-decoration:none;color:var(--ink);
+    font-weight:500;font-size:15px;
+    padding:10px 16px;border-radius:6px;
+    transition:all .2s;position:relative;
+  }
+  nav a:hover{color:var(--green-deep);background:rgba(31,74,47,.06)}
+  nav a.active{color:var(--green-deep)}
+  nav a.active::after{
+    content:'';position:absolute;bottom:4px;left:16px;right:16px;
+    height:2px;background:var(--burgundy);
+  }
+  .header-cta{
+    background:var(--green-deep);color:#fff;
+    padding:11px 22px;border-radius:4px;
+    text-decoration:none;font-weight:600;font-size:14px;
+    transition:all .2s;border:1px solid var(--green-deep);
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .header-cta:hover{background:var(--burgundy);border-color:var(--burgundy);transform:translateY(-1px)}
+  .mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+  .mobile-toggle span{display:block;width:24px;height:2px;background:var(--ink);margin:5px 0;transition:.3s}
+
+  /* ===== Hero ===== */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(135deg, rgba(31,74,47,.96) 0%, rgba(31,74,47,.88) 50%, rgba(122,46,46,.85) 100%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='60' height='60'><pattern id='p' width='60' height='60' patternUnits='userSpaceOnUse'><path d='M0 60L60 0M-15 15L15 -15M45 75L75 45' stroke='%23ffffff' stroke-width='.5' opacity='.15'/></pattern><rect width='100%' height='100%' fill='url(%23p)'/></svg>");
+    color:#fff;overflow:hidden;
+    padding:90px 0 110px;
+  }
+  .hero::before{
+    content:'';position:absolute;top:-40%;right:-15%;
+    width:700px;height:700px;border-radius:50%;
+    background:radial-gradient(circle, rgba(201,161,74,.18), transparent 70%);
+    pointer-events:none;
+  }
+  .hero::after{
+    content:'';position:absolute;bottom:-30%;left:-10%;
+    width:600px;height:600px;border-radius:50%;
+    background:radial-gradient(circle, rgba(160,69,69,.25), transparent 70%);
+    pointer-events:none;
+  }
+  .hero-inner{position:relative;z-index:2;display:grid;grid-template-columns:1.2fr 1fr;gap:60px;align-items:center}
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.1);backdrop-filter:blur(10px);
+    padding:8px 18px;border-radius:50px;font-size:13px;
+    border:1px solid rgba(255,255,255,.18);
+    margin-bottom:24px;letter-spacing:.05em;
+    animation:slideDown .8s ease;
+  }
+  .hero-tag .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold);animation:pulse 2s infinite}
+  @keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+  @keyframes slideDown{from{opacity:0;transform:translateY(-15px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes slideUp{from{opacity:0;transform:translateY(25px)}to{opacity:1;transform:translateY(0)}}
+
+  .hero h1{
+    font-family:'Cairo',sans-serif;
+    font-size:clamp(36px,5.5vw,68px);
+    font-weight:700;line-height:1.1;letter-spacing:-.02em;
+    margin-bottom:24px;
+    animation:slideUp .9s ease .1s both;
+  }
+  .hero h1 .accent{color:var(--gold);position:relative;display:inline-block}
+  .hero h1 .accent::after{
+    content:'';position:absolute;bottom:-6px;left:0;right:0;height:4px;
+    background:var(--gold);opacity:.4;
+  }
+  .hero p{
+    font-size:19px;line-height:1.7;
+    color:rgba(255,255,255,.85);
+    max-width:560px;margin-bottom:36px;font-weight:300;
+    animation:slideUp .9s ease .25s both;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;animation:slideUp .9s ease .4s both}
+  .btn{
+    padding:15px 30px;border-radius:4px;
+    text-decoration:none;font-weight:600;font-size:15px;
+    transition:all .25s;display:inline-flex;align-items:center;gap:10px;
+    border:1px solid transparent;cursor:pointer;
+  }
+  .btn-primary{background:var(--gold);color:var(--ink)}
+  .btn-primary:hover{background:#d8b35d;transform:translateY(-2px);box-shadow:0 12px 28px rgba(201,161,74,.35)}
+  .btn-ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+  .btn-ghost:hover{background:rgba(255,255,255,.1);border-color:#fff}
+
+  .hero-stats{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:30px;
+    margin-top:50px;padding-top:36px;
+    border-top:1px solid rgba(255,255,255,.15);
+    animation:slideUp .9s ease .55s both;
+  }
+  .stat-num{font-family:'Cairo';font-size:42px;font-weight:700;color:var(--gold);line-height:1}
+  .stat-label{font-size:13px;opacity:.75;margin-top:6px}
+
+  /* Hero visual */
+  .hero-visual{
+    position:relative;animation:slideUp 1s ease .3s both;
+  }
+  .hero-card{
+    background:rgba(255,255,255,.06);backdrop-filter:blur(20px);
+    border:1px solid rgba(255,255,255,.15);
+    border-radius:12px;padding:28px;
+    transform:rotate(-2deg);
+    box-shadow:0 30px 60px rgba(0,0,0,.3);
+  }
+  .hero-card-bg{
+    height:240px;border-radius:8px;margin-bottom:20px;
+    background:
+      linear-gradient(135deg, rgba(31,74,47,.85), rgba(122,46,46,.85)),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 240'><g fill='none' stroke='%23ffffff' stroke-width='1.5' opacity='.4'><path d='M50 180 L100 180 L110 160 L160 160 L160 130 L240 130 L240 110 L290 110 L300 130 L340 130 L340 180 L350 180' stroke-width='2'/><circle cx='130' cy='195' r='15'/><circle cx='280' cy='195' r='15'/><circle cx='130' cy='195' r='7'/><circle cx='280' cy='195' r='7'/><path d='M160 110 L180 70 L240 70 L240 130'/><path d='M200 90 L220 90 M210 80 L210 100'/></g></svg>");
+    background-size:cover;background-position:center;
+    position:relative;
+  }
+  .hero-card-bg::after{
+    content:'ALSHAEBAT';position:absolute;bottom:14px;right:14px;
+    font-family:'Cormorant Garamond',serif;font-weight:600;
+    letter-spacing:.2em;color:rgba(255,255,255,.6);font-size:11px;
+  }
+  .hero-card h3{font-family:'Cairo';font-size:22px;margin-bottom:8px}
+  .hero-card p{font-size:14px;color:rgba(255,255,255,.7);margin:0}
+  .hero-badge{
+    position:absolute;top:-15px;left:-15px;
+    background:var(--gold);color:var(--ink);
+    padding:14px 20px;border-radius:50%;font-weight:700;
+    font-size:13px;text-align:center;line-height:1.2;
+    transform:rotate(5deg);box-shadow:0 8px 20px rgba(201,161,74,.4);
+    width:90px;height:90px;display:flex;align-items:center;justify-content:center;
+  }
+
+  /* ===== Section base ===== */
+  section{padding:90px 0}
+  .section-head{text-align:center;max-width:720px;margin:0 auto 60px}
+  .eyebrow{
+    display:inline-block;font-family:'Cormorant Garamond',serif;
+    color:var(--burgundy);font-weight:600;letter-spacing:.25em;
+    font-size:13px;text-transform:uppercase;margin-bottom:14px;
+    position:relative;padding:0 30px;
+  }
+  .eyebrow::before,.eyebrow::after{
+    content:'';position:absolute;top:50%;width:20px;height:1px;background:var(--burgundy);
+  }
+  .eyebrow::before{right:0}.eyebrow::after{left:0}
+  .section-head h2{
+    font-family:'Cairo';font-size:clamp(32px,4vw,46px);
+    font-weight:700;color:var(--green-deep);
+    line-height:1.2;letter-spacing:-.02em;margin-bottom:16px;
+  }
+  .section-head p{font-size:17px;color:var(--ink-soft);line-height:1.7}
+
+  /* ===== Categories ===== */
+  .categories{background:var(--cream)}
+  .cat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .cat-card{
+    background:var(--paper);border-radius:8px;overflow:hidden;
+    transition:all .4s;cursor:pointer;
+    border:1px solid rgba(0,0,0,.06);position:relative;
+  }
+  .cat-card::before{
+    content:'';position:absolute;top:0;left:0;right:0;height:4px;
+    background:var(--green-deep);transform:scaleX(0);transform-origin:right;
+    transition:transform .4s;
+  }
+  .cat-card:hover{transform:translateY(-8px);box-shadow:0 30px 60px rgba(0,0,0,.1)}
+  .cat-card:hover::before{transform:scaleX(1)}
+  .cat-card:nth-child(2)::before{background:var(--burgundy)}
+  .cat-card:nth-child(3)::before{background:var(--gold)}
+  .cat-img{
+    height:220px;position:relative;overflow:hidden;
+    background:linear-gradient(135deg,var(--green-mid),var(--green-deep));
+    display:flex;align-items:center;justify-content:center;
+  }
+  .cat-card:nth-child(2) .cat-img{background:linear-gradient(135deg,var(--burgundy-light),var(--burgundy-deep))}
+  .cat-card:nth-child(3) .cat-img{background:linear-gradient(135deg,#3a3f3c,var(--ink))}
+  .cat-img svg{width:120px;height:120px;color:rgba(255,255,255,.95);transition:transform .5s}
+  .cat-card:hover .cat-img svg{transform:scale(1.08) rotate(-3deg)}
+  .cat-number{
+    position:absolute;top:18px;right:18px;
+    font-family:'Cormorant Garamond';font-size:13px;
+    color:rgba(255,255,255,.7);letter-spacing:.2em;
+  }
+  .cat-body{padding:28px}
+  .cat-body h3{font-family:'Cairo';font-size:24px;font-weight:700;color:var(--green-deep);margin-bottom:10px}
+  .cat-card:nth-child(2) .cat-body h3{color:var(--burgundy)}
+  .cat-body p{color:var(--ink-soft);font-size:15px;line-height:1.7;margin-bottom:18px}
+  .cat-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px}
+  .cat-tags span{font-size:12px;background:var(--cream-warm);color:var(--ink-soft);padding:4px 10px;border-radius:4px}
+  .cat-link{
+    color:var(--green-deep);text-decoration:none;font-weight:600;font-size:14px;
+    display:inline-flex;align-items:center;gap:6px;transition:gap .2s;
+  }
+  .cat-link:hover{gap:12px}
+  .cat-card:nth-child(2) .cat-link{color:var(--burgundy)}
+
+  /* ===== Products / Catalog ===== */
+  .catalog{background:var(--paper)}
+  .filter-bar{
+    display:flex;flex-wrap:wrap;gap:10px;justify-content:center;
+    margin-bottom:40px;
+  }
+  .filter-btn{
+    background:transparent;border:1px solid rgba(0,0,0,.15);
+    color:var(--ink-soft);padding:9px 20px;border-radius:50px;
+    font-family:inherit;font-size:14px;font-weight:500;
+    cursor:pointer;transition:all .2s;
+  }
+  .filter-btn:hover{border-color:var(--green-deep);color:var(--green-deep)}
+  .filter-btn.active{background:var(--green-deep);color:#fff;border-color:var(--green-deep)}
+  .prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .prod-card{
+    background:#fff;border:1px solid rgba(0,0,0,.07);
+    border-radius:8px;overflow:hidden;transition:all .3s;
+    display:flex;flex-direction:column;
+  }
+  .prod-card:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(0,0,0,.08);border-color:var(--green-light)}
+  .prod-img{
+    aspect-ratio:4/3;
+    background:radial-gradient(circle at 50% 42%, #ffffff, var(--cream) 72%);
+    display:flex;align-items:center;justify-content:center;
+    position:relative;overflow:hidden;
+  }
+  .prod-img::after{
+    content:'';position:absolute;width:62%;height:62%;border-radius:50%;
+    background:radial-gradient(circle, rgba(31,74,47,.10), transparent 70%);
+    transition:transform .45s ease;
+  }
+  .prod-card:hover .prod-img::after{transform:scale(1.18)}
+  .prod-img svg{width:60%;height:60%;color:var(--green-deep);opacity:.85;transition:transform .4s}
+  .prod-card:hover .prod-img svg{transform:scale(1.08)}
+  /* رسم المعدّة/المركبة التفصيلي */
+  .prod-img .prod-illu{
+    width:82%;height:82%;opacity:1;position:relative;z-index:2;
+    filter:drop-shadow(0 7px 12px rgba(26,31,28,.2));
+    transition:transform .45s cubic-bezier(.2,.7,.3,1.2);
+  }
+  .prod-card:hover .prod-illu{transform:scale(1.07) translateY(-3px)}
+  .prod-badge{
+    position:absolute;top:12px;right:12px;
+    background:var(--burgundy);color:#fff;
+    font-size:11px;padding:4px 10px;border-radius:3px;
+    font-weight:600;letter-spacing:.05em;
+  }
+  .prod-badge.new{background:var(--gold);color:var(--ink)}
+  .prod-info{padding:18px;flex:1;display:flex;flex-direction:column}
+  .prod-cat{font-size:11px;color:var(--burgundy);font-weight:600;letter-spacing:.15em;text-transform:uppercase;margin-bottom:6px}
+  .prod-info h4{font-family:'Cairo';font-size:17px;color:var(--ink);margin-bottom:6px;font-weight:600}
+  .prod-desc{font-size:13px;color:var(--ink-soft);margin-bottom:12px;flex:1}
+  .prod-foot{
+    display:flex;justify-content:space-between;align-items:center;
+    padding-top:12px;border-top:1px solid rgba(0,0,0,.06);
+  }
+  .prod-price{font-family:'Cairo';font-weight:700;color:var(--green-deep);font-size:14px}
+  .prod-btn{
+    background:var(--ink);color:#fff;border:none;
+    padding:7px 14px;border-radius:4px;font-size:12px;font-weight:600;
+    cursor:pointer;font-family:inherit;transition:background .2s;
+  }
+  .prod-btn:hover{background:var(--burgundy)}
+
+  /* ===== Features ===== */
+  .features{
+    background:
+      linear-gradient(180deg, var(--green-deep), var(--green-mid));
+    color:#fff;position:relative;overflow:hidden;
+  }
+  .features::before{
+    content:'';position:absolute;inset:0;
+    background:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40'><path d='M0 40L40 0' stroke='%23ffffff' stroke-width='.5' opacity='.08'/></svg>");
+  }
+  .features .section-head h2{color:#fff}
+  .features .eyebrow{color:var(--gold)}
+  .features .eyebrow::before,.features .eyebrow::after{background:var(--gold)}
+  .features .section-head p{color:rgba(255,255,255,.8)}
+  .feat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;position:relative;z-index:2}
+  .feat{text-align:right;padding:30px 0}
+  .feat-num{
+    font-family:'Cormorant Garamond';font-size:60px;font-weight:600;
+    color:var(--gold);line-height:1;margin-bottom:14px;opacity:.9;
+  }
+  .feat h4{font-family:'Cairo';font-size:20px;margin-bottom:10px;font-weight:600}
+  .feat p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.7}
+
+  /* ===== Services ===== */
+  .services{background:var(--cream)}
+  .serv-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:30px}
+  .serv-card{
+    background:var(--paper);padding:36px;border-radius:8px;
+    display:flex;gap:24px;align-items:flex-start;
+    border:1px solid rgba(0,0,0,.05);
+    transition:all .3s;
+  }
+  .serv-card:hover{transform:translateY(-4px);box-shadow:0 20px 40px rgba(0,0,0,.06)}
+  .serv-icon{
+    flex-shrink:0;width:64px;height:64px;border-radius:8px;
+    background:linear-gradient(135deg,var(--green-mid),var(--green-deep));
+    display:flex;align-items:center;justify-content:center;color:#fff;
+  }
+  .serv-card:nth-child(even) .serv-icon{background:linear-gradient(135deg,var(--burgundy-light),var(--burgundy))}
+  .serv-icon svg{width:32px;height:32px}
+  .serv-card h4{font-family:'Cairo';font-size:21px;color:var(--ink);margin-bottom:8px;font-weight:600}
+  .serv-card p{color:var(--ink-soft);font-size:15px;line-height:1.7}
+
+  /* ===== Quote Form ===== */
+  .quote{background:var(--paper)}
+  .quote-wrap{
+    display:grid;grid-template-columns:1fr 1.3fr;gap:60px;
+    background:#fff;border-radius:12px;overflow:hidden;
+    border:1px solid rgba(0,0,0,.06);
+    box-shadow:0 30px 80px rgba(0,0,0,.06);
+  }
+  .quote-side{
+    background:linear-gradient(135deg,var(--green-deep),var(--burgundy-deep));
+    color:#fff;padding:50px 40px;position:relative;overflow:hidden;
+  }
+  .quote-side::before{
+    content:'';position:absolute;bottom:-50px;right:-50px;
+    width:200px;height:200px;border-radius:50%;
+    background:rgba(201,161,74,.15);
+  }
+  .quote-side h3{font-family:'Cairo';font-size:32px;margin-bottom:16px;line-height:1.2;font-weight:700}
+  .quote-side > p{font-size:15px;color:rgba(255,255,255,.85);margin-bottom:34px;line-height:1.7}
+  .quote-feats{list-style:none;display:flex;flex-direction:column;gap:14px;position:relative;z-index:2}
+  .quote-feats li{display:flex;align-items:center;gap:12px;font-size:15px}
+  .quote-feats li::before{
+    content:'';width:24px;height:24px;border-radius:50%;
+    background:var(--gold);flex-shrink:0;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231a1f1c' stroke-width='3'><polyline points='20 6 9 17 4 12'/></svg>");
+    background-size:14px;background-position:center;background-repeat:no-repeat;
+  }
+  .quote-form{padding:50px 40px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+  .form-group{margin-bottom:16px}
+  .form-group label{display:block;font-size:13px;font-weight:600;color:var(--ink-soft);margin-bottom:6px}
+  .form-group input,.form-group select,.form-group textarea{
+    width:100%;padding:12px 14px;border:1px solid rgba(0,0,0,.12);
+    border-radius:6px;font-family:inherit;font-size:14px;
+    background:var(--paper);transition:all .2s;
+  }
+  .form-group input:focus,.form-group select:focus,.form-group textarea:focus{
+    outline:none;border-color:var(--green-deep);background:#fff;
+    box-shadow:0 0 0 3px rgba(31,74,47,.08);
+  }
+  .form-group textarea{resize:vertical;min-height:90px}
+  .submit-btn{
+    width:100%;background:var(--green-deep);color:#fff;
+    padding:14px;border:none;border-radius:6px;
+    font-family:inherit;font-weight:700;font-size:15px;
+    cursor:pointer;transition:all .2s;
+    display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .submit-btn:hover{background:var(--burgundy);transform:translateY(-2px);box-shadow:0 12px 25px rgba(31,74,47,.25)}
+
+  /* ===== Contact ===== */
+  .contact{background:var(--ink);color:var(--cream);padding:80px 0}
+  .contact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;align-items:start}
+  .contact-brand .logo-ar{color:var(--cream);font-size:30px}
+  .contact-brand .logo-en{color:var(--gold)}
+  .contact-brand p{font-size:14px;color:rgba(245,241,232,.65);margin-top:16px;line-height:1.7}
+  .contact h5{font-family:'Cairo';font-size:16px;color:#fff;margin-bottom:18px;font-weight:600;letter-spacing:.02em}
+  .contact ul{list-style:none}
+  .contact li{margin-bottom:10px}
+  .contact a{color:rgba(245,241,232,.7);text-decoration:none;font-size:14px;transition:color .2s}
+  .contact a:hover{color:var(--gold)}
+  .contact-info li{display:flex;gap:10px;align-items:flex-start;color:rgba(245,241,232,.7);font-size:14px;line-height:1.6}
+  .contact-info svg{width:18px;height:18px;flex-shrink:0;margin-top:2px;color:var(--gold)}
+  .socials{display:flex;gap:10px;margin-top:14px}
+  .socials a{
+    width:38px;height:38px;border-radius:50%;
+    border:1px solid rgba(255,255,255,.15);
+    display:flex;align-items:center;justify-content:center;
+    color:var(--cream);transition:all .2s;
+  }
+  .socials a:hover{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+  .socials svg{width:16px;height:16px}
+  .footer-bottom{
+    border-top:1px solid rgba(255,255,255,.08);
+    margin-top:50px;padding-top:24px;
+    display:flex;justify-content:space-between;flex-wrap:wrap;gap:14px;
+    font-size:13px;color:rgba(245,241,232,.5);
+  }
+
+  /* ===== Mobile ===== */
+  @media (max-width: 980px){
+    .hero{padding:60px 0 80px}
+    .hero-inner{grid-template-columns:1fr;gap:50px}
+    .cat-grid{grid-template-columns:1fr}
+    .prod-grid{grid-template-columns:repeat(2,1fr)}
+    .feat-grid{grid-template-columns:repeat(2,1fr)}
+    .serv-grid{grid-template-columns:1fr}
+    .quote-wrap{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:repeat(2,1fr)}
+    .form-row{grid-template-columns:1fr}
+    nav{display:none;position:absolute;top:100%;left:0;right:0;background:var(--paper);box-shadow:0 10px 30px rgba(0,0,0,.1);padding:20px}
+    nav.open{display:block}
+    nav ul{flex-direction:column;gap:0}
+    nav a{display:block;padding:14px}
+    .mobile-toggle{display:block}
+    .header-cta{display:none}
+    .hero-stats{grid-template-columns:1fr;gap:18px;text-align:center}
+    .top-bar .info{gap:10px;font-size:12px}
+  }
+  @media (max-width: 540px){
+    .prod-grid{grid-template-columns:1fr}
+    .feat-grid{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .logo-mark{width:52px;height:52px}
+    .logo-ar{font-size:22px}
+    section{padding:60px 0}
+  }
+
+  /* ===== أزرار المنتج (طلب + واتساب) ===== */
+  .prod-actions{display:flex;gap:8px;align-items:center}
+  .prod-wa{
+    background:#25d366;color:#fff;border:none;border-radius:4px;
+    width:34px;height:31px;flex-shrink:0;cursor:pointer;
+    display:inline-flex;align-items:center;justify-content:center;
+    transition:background .2s,transform .2s;
+  }
+  .prod-wa:hover{background:#1da851;transform:translateY(-1px)}
+  .prod-wa svg{width:17px;height:17px}
+
+  /* ===== تواصل سريع داخل نموذج العرض ===== */
+  .quick-contact{
+    margin-top:30px;padding-top:26px;
+    border-top:1px solid rgba(255,255,255,.18);position:relative;z-index:2;
+  }
+  .quick-contact .qc-label{font-size:13px;color:rgba(255,255,255,.7);margin-bottom:14px;letter-spacing:.03em}
+  .qc-btns{display:flex;flex-direction:column;gap:10px}
+  .qc-btn{
+    display:flex;align-items:center;gap:12px;
+    background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);
+    color:#fff;text-decoration:none;padding:12px 16px;border-radius:8px;
+    font-size:14px;font-weight:600;transition:all .2s;
+  }
+  .qc-btn:hover{background:rgba(255,255,255,.16);transform:translateX(-3px)}
+  .qc-btn svg{width:20px;height:20px;flex-shrink:0}
+  .qc-btn.wa svg{color:#4ade80}
+  .qc-btn small{display:block;font-weight:400;font-size:12px;color:rgba(255,255,255,.6);margin-top:2px}
+
+  /* ===== أزرار النموذج (إرسال أساسي + واتساب) ===== */
+  .form-actions{display:flex;flex-direction:column;gap:12px;margin-top:6px}
+  .submit-btn[disabled]{opacity:.75;cursor:not-allowed;transform:none}
+  .submit-btn .spinner{
+    width:18px;height:18px;border:2.5px solid rgba(255,255,255,.4);
+    border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;
+  }
+  @keyframes spin{to{transform:rotate(360deg)}}
+  /* فاصل "أو" */
+  .form-or{display:flex;align-items:center;gap:12px;color:var(--ink-soft);font-size:13px;margin:2px 0}
+  .form-or::before,.form-or::after{content:'';flex:1;height:1px;background:rgba(0,0,0,.1)}
+  .wa-btn{
+    width:100%;background:#25d366;color:#fff;
+    padding:14px;border:none;border-radius:6px;
+    font-family:inherit;font-weight:700;font-size:15px;cursor:pointer;
+    transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+  }
+  .wa-btn:hover{background:#1da851;transform:translateY(-2px);box-shadow:0 12px 25px rgba(37,211,102,.3)}
+  .wa-btn svg{width:18px;height:18px}
+  /* ملاحظة أسفل الأزرار */
+  .form-note{font-size:12.5px;color:var(--ink-soft);text-align:center;margin-top:12px;line-height:1.6;display:flex;align-items:center;justify-content:center;gap:6px}
+  .form-note svg{width:15px;height:15px;color:var(--green-light);flex-shrink:0}
+  /* رسالة الحالة (نجاح / خطأ) */
+  .form-status{
+    margin-top:16px;padding:16px 18px;border-radius:8px;font-size:14px;line-height:1.7;
+    display:flex;gap:12px;align-items:flex-start;animation:slideUp .4s ease;
+  }
+  .form-status svg{width:22px;height:22px;flex-shrink:0;margin-top:1px}
+  .form-status.success{background:rgba(31,74,47,.08);border:1px solid rgba(31,74,47,.25);color:var(--green-deep)}
+  .form-status.error{background:rgba(122,46,46,.07);border:1px solid rgba(122,46,46,.25);color:var(--burgundy)}
+  .form-status strong{display:block;margin-bottom:3px;font-size:15px}
+  .form-status a{color:inherit;font-weight:700;text-decoration:underline}
+
+  /* ===== أزرار عائمة ===== */
+  .fab-stack{position:fixed;bottom:24px;left:24px;z-index:500;display:flex;flex-direction:column;gap:12px}
+  html[dir="ltr"] .fab-stack{left:auto;right:24px}
+  .fab{
+    width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;
+    display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.22);transition:transform .25s,box-shadow .25s,opacity .3s,visibility .3s;
+  }
+  .fab:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+  .fab svg{width:28px;height:28px}
+  .fab-email{background:var(--burgundy);color:#fff;position:relative}
+  .fab-email:hover{background:var(--burgundy-deep)}
+  .fab-wa-mini{background:#25d366;color:#fff;width:44px;height:44px;align-self:center}
+  .fab-wa-mini:hover{background:#1da851}
+  .fab-wa-mini svg{width:22px;height:22px}
+  .fab-email::after{
+    content:'';position:absolute;inset:0;border-radius:50%;
+    border:2px solid var(--burgundy);animation:fabPulse 2.2s ease-out infinite;
+  }
+  @keyframes fabPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+  .fab-top{background:var(--green-deep);color:#fff;width:50px;height:50px;opacity:0;visibility:hidden}
+  .fab-top:hover{background:var(--burgundy)}
+  .fab-top.show{opacity:1;visibility:visible}
+  .fab-top svg{width:24px;height:24px}
+  @media (prefers-reduced-motion: reduce){ .fab-email::after{animation:none} }
+</style>
+</head>
+<body>
+
+<!-- ===== TOP BAR ===== -->
+<div class="top-bar">
+  <div class="container">
+    <div class="info">
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a9 9 0 0 1-9 9m9-9a9 9 0 0 0-9-9m9 9H3m9 9a9 9 0 0 1-9-9m9 9c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3"/></svg>
+        <span data-i18n="topbar.serve">نخدم جميع مناطق المملكة</span>
+      </span>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2z"/><path d="m2 7 10 6 10-6"/></svg>
+        <a href="mailto:alshabaat@alshabaat.com">alshabaat@alshabaat.com</a>
+      </span>
+    </div>
+    <div class="info">
+      <button class="lang-btn active" id="langAr" onclick="setLang('ar')">عربي</button><button class="lang-btn" id="langEn" onclick="setLang('en')">English</button>
+      <span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <a href="tel:0572693653">0572693653</a>
+      </span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== HEADER ===== -->
+<header id="header">
+  <div class="container nav-wrap">
+    <a href="#" class="logo">
+      <img class="logo-mark" src="Logo Al shaabat.jpeg" alt="شعار الشعبات">
+    </a>
+
+    <nav id="nav">
+      <ul>
+        <li><a href="#home" class="active" data-i18n="nav.home">الرئيسية</a></li>
+        <li><a href="#categories" data-i18n="nav.cat">الأقسام</a></li>
+        <li><a href="#catalog" data-i18n="nav.equip">المعدات</a></li>
+        <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
+        <li><a href="#quote" data-i18n="nav.quote">طلب عرض سعر</a></li>
+        <li><a href="#contact" data-i18n="nav.contact">تواصل معنا</a></li>
+      </ul>
+    </nav>
+
+    <a href="#quote" class="header-cta"><span data-i18n="nav.cta">اطلب عرض سعر</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><path d="M5 12h14M13 5l-7 7 7 7" transform="scale(-1,1) translate(-24,0)"/></svg>
+    </a>
+
+    <button class="mobile-toggle" id="mobileToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="container hero-inner">
+    <div>
+      <div class="hero-tag">
+        <span class="dot"></span>
+        <span data-i18n="hero.tag">موردون معتمدون منذ سنوات</span>
+      </div>
+      <h1 data-i18n-html="hero.h1">
+        شريكك الأول في توريد
+        <span class="accent">معدات النقل</span>
+        الثقيل والخفيف والمركبات
+      </h1>
+      <p data-i18n="hero.p">نوفر لك أحدث المعدات والمركبات من أكبر العلامات التجارية العالمية، بضمانات شاملة وخدمات ما بعد البيع وحلول تمويلية مرنة تناسب احتياجات مشروعك في القطاع الإنشائي واللوجستي والتعديني.</p>
+      <div class="hero-actions">
+        <a href="#catalog" class="btn btn-primary"><span data-i18n="hero.cta1">تصفح المعدات</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+        </a>
+        <a href="#quote" class="btn btn-ghost" data-i18n="hero.cta2">
+          اطلب استشارة مجانية
+        </a>
+      </div>
+      <div class="hero-stats">
+        <div>
+          <div class="stat-num">+500</div>
+          <div class="stat-label" data-i18n="hero.stat1">معدة وآلية تم توريدها</div>
+        </div>
+        <div>
+          <div class="stat-num">+150</div>
+          <div class="stat-label" data-i18n="hero.stat2">عميل من القطاعين العام والخاص</div>
+        </div>
+        <div>
+          <div class="stat-num">24/7</div>
+          <div class="stat-label" data-i18n="hero.stat3">دعم فني وقطع غيار</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="hero-card">
+        <div class="hero-card-bg"></div>
+        <h3 data-i18n="hero.card.h">كتالوج 2026</h3>
+        <p data-i18n="hero.card.p">أحدث الموديلات من شاحنات وقاطرات ومعدات ثقيلة جاهزة للتوريد الفوري</p>
+      </div>
+      <div class="hero-badge" data-i18n-html="hero.badge">معتمد<br>رسمياً</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATEGORIES ===== -->
+<section class="categories" id="categories">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="cat.eyebrow">أقسامنا الرئيسية</span>
+      <h2 data-i18n="cat.h2">منظومة متكاملة للنقل بأنواعه</h2>
+      <p data-i18n="cat.p">نتخصص في توريد ثلاث فئات رئيسية تغطي كافة احتياجات مشاريع البنية التحتية والنقل واللوجستيات</p>
+    </div>
+
+    <div class="cat-grid">
+      <!-- Heavy -->
+      <div class="cat-card">
+        <div class="cat-img">
+          <span class="cat-number" data-i18n="cat1.num">القسم — 01</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 17h2v-6h11v6h2V8H3v9zm14.5 1.5a1.5 1.5 0 110 3 1.5 1.5 0 010-3zm-10 0a1.5 1.5 0 110 3 1.5 1.5 0 010-3zM19 11h-2v3h4v-1.5L19 11zm2.5 8a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z"/></svg>
+        </div>
+        <div class="cat-body">
+          <h3 data-i18n="cat1.h">معدات النقل الثقيل</h3>
+          <p data-i18n="cat1.p">شاحنات ثقيلة، قاطرات، رافعات، حفارات، خلاطات خرسانة، شاحنات قلابة، وكافة معدات المقاولات والمشاريع الكبرى.</p>
+          <div class="cat-tags">
+            <span data-i18n="cat1.t1">شاحنات قاطرة</span>
+            <span data-i18n="cat1.t2">حفارات</span>
+            <span data-i18n="cat1.t3">قلابات</span>
+            <span data-i18n="cat1.t4">رافعات</span>
+          </div>
+          <a href="#catalog" class="cat-link"><span data-i18n="cat.link.equip">استعراض المعدات</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Light -->
+      <div class="cat-card">
+        <div class="cat-img">
+          <span class="cat-number" data-i18n="cat2.num">القسم — 02</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm12 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm-1-5.5V9.5h2.5l1.96 2.5H17z"/></svg>
+        </div>
+        <div class="cat-body">
+          <h3 data-i18n="cat2.h">معدات النقل الخفيف</h3>
+          <p data-i18n="cat2.p">شاحنات صغيرة، فان توصيل، بيك أب، شاحنات تبريد، ومعدات نقل خفيفة لخدمات التوصيل واللوجستيات الحضرية.</p>
+          <div class="cat-tags">
+            <span data-i18n="cat2.t1">بيك أب</span>
+            <span data-i18n="cat2.t2">فان توصيل</span>
+            <span data-i18n="cat2.t3">تبريد</span>
+            <span data-i18n="cat2.t4">شاحنات صغيرة</span>
+          </div>
+          <a href="#catalog" class="cat-link"><span data-i18n="cat.link.equip">استعراض المعدات</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Vehicles -->
+      <div class="cat-card">
+        <div class="cat-img">
+          <span class="cat-number" data-i18n="cat3.num">القسم — 03</span>
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.5 16c-.83 0-1.5-.67-1.5-1.5S5.67 13 6.5 13s1.5.67 1.5 1.5S7.33 16 6.5 16zm11 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM5 11l1.5-4.5h11L19 11H5z"/></svg>
+        </div>
+        <div class="cat-body">
+          <h3 data-i18n="cat3.h">المركبات والسيارات</h3>
+          <p data-i18n="cat3.p">سيارات شركات، أساطيل، سيارات تنفيذية، سيارات ركاب وعائلية، ومركبات دفع رباعي بمختلف الفئات والموديلات.</p>
+          <div class="cat-tags">
+            <span data-i18n="cat3.t1">سيدان</span>
+            <span data-i18n="cat3.t2">دفع رباعي</span>
+            <span data-i18n="cat3.t3">أساطيل شركات</span>
+            <span data-i18n="cat3.t4">تنفيذية</span>
+          </div>
+          <a href="#catalog" class="cat-link"><span data-i18n="cat.link.veh">استعراض المركبات</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="14" height="14"><path d="M19 12H5M12 5l-7 7 7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CATALOG ===== -->
+<section class="catalog" id="catalog">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="catalog.eyebrow">المعدات المتاحة</span>
+      <h2 data-i18n="catalog.h2">كتالوج التوريد</h2>
+      <p data-i18n="catalog.p">اختر من بين باقة واسعة من المعدات والمركبات الجاهزة للتوريد الفوري بأفضل الأسعار وأعلى المواصفات</p>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all" data-i18n="filter.all">الكل</button>
+      <button class="filter-btn" data-filter="heavy" data-i18n="filter.heavy">ثقيل</button>
+      <button class="filter-btn" data-filter="light" data-i18n="filter.light">خفيف</button>
+      <button class="filter-btn" data-filter="cars" data-i18n="filter.cars">مركبات</button>
+    </div>
+
+    <div class="prod-grid" id="prodGrid">
+      <!-- Products will be injected by JS -->
+    </div>
+  </div>
+</section>
+
+<!-- ===== FEATURES ===== -->
+<section class="features">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="feat.eyebrow">لماذا الشعبات</span>
+      <h2 data-i18n="feat.h2">أربعة أسباب لاختيارنا</h2>
+      <p data-i18n="feat.p">التزامنا الراسخ بالجودة والشفافية والخدمة المتميزة جعلنا الخيار الأول للعديد من الشركات والمؤسسات</p>
+    </div>
+
+    <div class="feat-grid">
+      <div class="feat">
+        <div class="feat-num">01</div>
+        <h4 data-i18n="feat1.h">توريد فوري</h4>
+        <p data-i18n="feat1.p">مخزون جاهز للتسليم في أقصر وقت ممكن، مع إمكانية التوريد لكافة مدن المملكة دون استثناء</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">02</div>
+        <h4 data-i18n="feat2.h">ضمانات شاملة</h4>
+        <p data-i18n="feat2.p">جميع المعدات والمركبات تأتي مع ضمان رسمي يشمل القطع والصيانة الدورية وفقاً للمواصفات</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">03</div>
+        <h4 data-i18n="feat3.h">حلول تمويلية</h4>
+        <p data-i18n="feat3.p">برامج تمويل وتأجير منتهي بالتمليك بالشراكة مع أكبر البنوك وشركات التمويل في المملكة</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">04</div>
+        <h4 data-i18n="feat4.h">دعم متواصل</h4>
+        <p data-i18n="feat4.p">فريق فني متخصص متاح على مدار الساعة، بالإضافة إلى توفر قطع الغيار الأصلية في مستودعاتنا</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SERVICES ===== -->
+<section class="services" id="services">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow" data-i18n="serv.eyebrow">خدماتنا</span>
+      <h2 data-i18n="serv.h2">أكثر من مجرد توريد</h2>
+      <p data-i18n="serv.p">منظومة خدمات متكاملة مصممة لتوفير قيمة حقيقية لعملائنا في كل مرحلة من مراحل المشروع</p>
+    </div>
+
+    <div class="serv-grid">
+      <div class="serv-card">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><path d="m3.27 6.96 8.73 5.05 8.73-5.05M12 22.08V12"/></svg>
+        </div>
+        <div>
+          <h4 data-i18n="serv1.h">توريد المعدات والمركبات</h4>
+          <p data-i18n="serv1.p">توريد جميع أنواع معدات النقل الثقيل والخفيف والمركبات من العلامات التجارية الموثوقة بمواصفات مطابقة لمتطلبات السوق السعودي.</p>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+        </div>
+        <div>
+          <h4 data-i18n="serv2.h">الصيانة وقطع الغيار</h4>
+          <p data-i18n="serv2.p">عقود صيانة دورية وتوريد قطع الغيار الأصلية مع ضمان أوقات استجابة قياسية لتقليل توقف معدات العميل.</p>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <h4 data-i18n="serv3.h">التأجير قصير وطويل الأمد</h4>
+          <p data-i18n="serv3.p">خيارات تأجير مرنة للأفراد والشركات بأسعار تنافسية مع إمكانية التأجير المنتهي بالتمليك حسب الحاجة.</p>
+        </div>
+      </div>
+
+      <div class="serv-card">
+        <div class="serv-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v6m0 8v6M4.93 4.93l4.24 4.24m5.66 5.66 4.24 4.24M2 12h6m8 0h6M4.93 19.07l4.24-4.24m5.66-5.66 4.24-4.24"/></svg>
+        </div>
+        <div>
+          <h4 data-i18n="serv4.h">الاستشارات الفنية</h4>
+          <p data-i18n="serv4.p">فريق من المهندسين والخبراء جاهز لتقديم استشارات فنية متخصصة لاختيار المعدات الأنسب لطبيعة مشروعك.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== QUOTE FORM ===== -->
+<section class="quote" id="quote">
+  <div class="container">
+    <div class="quote-wrap">
+      <div class="quote-side">
+        <h3 data-i18n="quote.h">اطلب عرض سعر مخصص</h3>
+        <p data-i18n="quote.p">أخبرنا عن احتياجاتك وسيتواصل معك فريق المبيعات المتخصص خلال 24 ساعة بعرض سعر مفصّل يلبي متطلباتك.</p>
+        <ul class="quote-feats">
+          <li data-i18n="quote.f1">رد خلال 24 ساعة عمل</li>
+          <li data-i18n="quote.f2">عرض سعر مفصّل ومجاني</li>
+          <li data-i18n="quote.f3">استشارة فنية مجانية</li>
+          <li data-i18n="quote.f4">خيارات تمويل مرنة</li>
+          <li data-i18n="quote.f5">ضمانات شاملة</li>
+        </ul>
+
+        <div class="quick-contact">
+          <div class="qc-label" data-i18n="qc.label">تحتاج رداً فورياً؟ تواصل معنا مباشرة:</div>
+          <div class="qc-btns">
+            <a class="qc-btn wa" href="https://wa.me/966572693653?text=مرحباً، أرغب في الاستفسار عن توريد معدات" target="_blank" rel="noopener">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+              <span><span data-i18n="qc.wa">محادثة واتساب</span><small>0572693653</small></span>
+            </a>
+            <a class="qc-btn" href="tel:0572693653">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.85.34 1.68.66 2.47a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.79.32 1.62.54 2.47.66A2 2 0 0 1 22 16.92z"/></svg>
+              <span><span data-i18n="qc.call">اتصال هاتفي</span><small>0572693653</small></span>
+            </a>
+            <a class="qc-btn" href="mailto:alshabaat@alshabaat.com?subject=استفسار عن توريد معدات">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+              <span><span data-i18n="qc.email">بريد إلكتروني</span><small>alshabaat@alshabaat.com</small></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <form class="quote-form" id="quoteForm" action="https://formspree.io/f/mwvjknnr" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.namelabel">الاسم الكامل *</label>
+            <input type="text" name="name" required placeholder="أدخل اسمك الكامل" data-i18n-placeholder="form.nameph">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.colabel">اسم الشركة</label>
+            <input type="text" name="company" placeholder="اختياري" data-i18n-placeholder="form.coph">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.tllabel">رقم الجوال *</label>
+            <input type="tel" name="phone" required placeholder="05xxxxxxxx">
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.emaillabel">البريد الإلكتروني *</label>
+            <input type="email" name="email" required placeholder="email@domain.com" data-i18n-placeholder="form.emailph">
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label data-i18n="form.typelabel">نوع المعدات المطلوبة *</label>
+            <select name="type" required>
+              <option value="" data-i18n="form.type0">اختر نوع المعدات</option>
+              <option data-i18n="form.type1">معدات النقل الثقيل</option>
+              <option data-i18n="form.type2">معدات النقل الخفيف</option>
+              <option data-i18n="form.type3">مركبات وسيارات</option>
+              <option data-i18n="form.type4">متعدد / لست متأكداً</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label data-i18n="form.qtylabel">عدد القطع المطلوبة</label>
+            <select name="qty">
+              <option data-i18n="form.qty1">قطعة واحدة</option>
+              <option data-i18n="form.qty2">2 - 5 قطع</option>
+              <option data-i18n="form.qty3">6 - 20 قطعة</option>
+              <option data-i18n="form.qty4">أكثر من 20 قطعة</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label data-i18n="form.detlabel">تفاصيل إضافية</label>
+          <textarea name="details" placeholder="اذكر الموديل المطلوب، المواصفات، موعد التسليم، أو أي تفاصيل أخرى..." data-i18n-placeholder="form.detph"></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="submit-btn" id="submitBtn"><span class="btn-label" data-i18n="form.submit">إرسال الطلب</span>
+            <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="18" height="18"><path d="M22 2 11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg>
+          </button>
+        </div>
+
+        <p class="form-note" data-i18n-html="form.note">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+          يصلنا طلبك مباشرة على بريد المؤسسة · رد خلال 24 ساعة عمل
+        </p>
+
+        <div class="form-status" id="formStatus" role="status" aria-live="polite" hidden></div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer class="contact" id="contact">
+  <div class="container">
+    <div class="contact-grid">
+      <div class="contact-brand">
+        <a href="#" class="logo">
+          <img class="logo-mark" src="Logo Al shaabat.jpeg" alt="شعار الشعبات">
+        </a>
+        <p data-i18n="footer.brand.p">شريكك الأول في توريد معدات النقل الثقيل والخفيف والمركبات في المملكة العربية السعودية.</p>
+        <div class="socials">
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.46 6c-.77.35-1.6.58-2.46.69.88-.53 1.56-1.37 1.88-2.38-.83.5-1.75.85-2.72 1.05C18.37 4.5 17.26 4 16 4c-2.35 0-4.27 1.92-4.27 4.29 0 .34.04.67.11.98C8.28 9.09 5.11 7.38 3 4.79c-.37.63-.58 1.37-.58 2.15 0 1.49.75 2.81 1.91 3.56-.71 0-1.37-.2-1.95-.5v.03c0 2.08 1.48 3.82 3.44 4.21-.36.1-.74.15-1.13.15-.27 0-.54-.03-.8-.08.54 1.69 2.11 2.95 4 2.98-1.46 1.16-3.31 1.84-5.33 1.84-.34 0-.68-.02-1.02-.06C3.44 20.29 5.7 21 8.12 21 16 21 20.33 14.46 20.33 8.79c0-.19 0-.37-.01-.56.84-.6 1.56-1.36 2.14-2.23z"/></svg></a>
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+          <a href="#" aria-label="WhatsApp"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+        </div>
+      </div>
+
+      <div>
+        <h5 data-i18n="footer.links.h">روابط سريعة</h5>
+        <ul>
+          <li><a href="#home" data-i18n="nav.home">الرئيسية</a></li>
+          <li><a href="#categories" data-i18n="nav.cat">الأقسام</a></li>
+          <li><a href="#catalog" data-i18n="nav.equip">المعدات</a></li>
+          <li><a href="#services" data-i18n="nav.services">خدماتنا</a></li>
+          <li><a href="#quote" data-i18n="nav.quote">طلب عرض سعر</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 data-i18n="footer.cat.h">أقسامنا</h5>
+        <ul>
+          <li><a href="#" data-i18n="footer.fc.heavy">معدات النقل الثقيل</a></li>
+          <li><a href="#" data-i18n="footer.fc.light">معدات النقل الخفيف</a></li>
+          <li><a href="#" data-i18n="footer.fc.cars">المركبات والسيارات</a></li>
+          <li><a href="#" data-i18n="footer.fc.parts">قطع الغيار</a></li>
+          <li><a href="#" data-i18n="footer.fc.maint">خدمات الصيانة</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h5 data-i18n="footer.contact.h">تواصل معنا</h5>
+        <ul class="contact-info">
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            <span data-i18n-html="footer.address">طريق الملك فهد، الرياض<br>المملكة العربية السعودية</span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.85.34 1.68.66 2.47a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.79.32 1.62.54 2.47.66A2 2 0 0 1 22 16.92z"/></svg>
+            <span><a href="tel:0572693653" style="color:inherit">0572693653</a></span>
+          </li>
+          <li>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+            <span><a href="mailto:alshabaat@alshabaat.com" style="color:inherit">alshabaat@alshabaat.com</a></span>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div data-i18n="footer.copy">© 2026 مؤسسة الشعبات للتجارة. جميع الحقوق محفوظة.</div>
+      <div data-i18n="footer.reg">السجل التجاري: 0000000000 | الرقم الضريبي: 300000000000003</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ===== أزرار عائمة ===== -->
+<div class="fab-stack">
+  <a class="fab fab-email" id="fabEmail" href="mailto:alshabaat@alshabaat.com?subject=استفسار%20عن%20توريد%20معدات&body=السلام%20عليكم،%0D%0A%0D%0Aأرغب%20في%20الاستفسار%20عن:" aria-label="تواصل عبر البريد الإلكتروني" title="راسلنا على alshabaat@alshabaat.com">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+  </a>
+  <a class="fab fab-wa-mini" href="https://wa.me/966572693653?text=مرحباً، أرغب في الاستفسار عن توريد معدات" target="_blank" rel="noopener" aria-label="تواصل عبر واتساب" title="محادثة واتساب">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+  </a>
+  <button type="button" class="fab fab-top" id="backTop" aria-label="العودة للأعلى">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+  </button>
+</div>
+
+<script>
+  let currentLang = localStorage.getItem('lang') || 'ar';
+  let currentFilter = 'all';
+
+  // ===== إعدادات التواصل =====
+  const CONTACT = { wa: '966572693653', email: 'alshabaat@alshabaat.com' };
+  const waLink = (msg) => 'https://wa.me/' + CONTACT.wa + '?text=' + encodeURIComponent(msg);
+
+  // ===== Translations =====
+  const T = {
+    ar: {
+      'topbar.serve':'نخدم جميع مناطق المملكة',
+      'nav.home':'الرئيسية','nav.cat':'الأقسام','nav.equip':'المعدات',
+      'nav.services':'خدماتنا','nav.quote':'طلب عرض سعر','nav.contact':'تواصل معنا','nav.cta':'اطلب عرض سعر',
+      'hero.tag':'موردون معتمدون منذ سنوات',
+      'hero.h1':'شريكك الأول في توريد <span class="accent">معدات النقل</span> الثقيل والخفيف والمركبات',
+      'hero.p':'نوفر لك أحدث المعدات والمركبات من أكبر العلامات التجارية العالمية، بضمانات شاملة وخدمات ما بعد البيع وحلول تمويلية مرنة تناسب احتياجات مشروعك في القطاع الإنشائي واللوجستي والتعديني.',
+      'hero.cta1':'تصفح المعدات','hero.cta2':'اطلب استشارة مجانية',
+      'hero.stat1':'معدة وآلية تم توريدها','hero.stat2':'عميل من القطاعين العام والخاص','hero.stat3':'دعم فني وقطع غيار',
+      'hero.card.h':'كتالوج 2026','hero.card.p':'أحدث الموديلات من شاحنات وقاطرات ومعدات ثقيلة جاهزة للتوريد الفوري',
+      'hero.badge':'معتمد<br>رسمياً',
+      'cat.eyebrow':'أقسامنا الرئيسية','cat.h2':'منظومة متكاملة للنقل بأنواعه',
+      'cat.p':'نتخصص في توريد ثلاث فئات رئيسية تغطي كافة احتياجات مشاريع البنية التحتية والنقل واللوجستيات',
+      'cat1.num':'القسم — 01','cat1.h':'معدات النقل الثقيل',
+      'cat1.p':'شاحنات ثقيلة، قاطرات، رافعات، حفارات، خلاطات خرسانة، شاحنات قلابة، وكافة معدات المقاولات والمشاريع الكبرى.',
+      'cat1.t1':'شاحنات قاطرة','cat1.t2':'حفارات','cat1.t3':'قلابات','cat1.t4':'رافعات',
+      'cat.link.equip':'استعراض المعدات',
+      'cat2.num':'القسم — 02','cat2.h':'معدات النقل الخفيف',
+      'cat2.p':'شاحنات صغيرة، فان توصيل، بيك أب، شاحنات تبريد، ومعدات نقل خفيفة لخدمات التوصيل واللوجستيات الحضرية.',
+      'cat2.t1':'بيك أب','cat2.t2':'فان توصيل','cat2.t3':'تبريد','cat2.t4':'شاحنات صغيرة',
+      'cat3.num':'القسم — 03','cat3.h':'المركبات والسيارات',
+      'cat3.p':'سيارات شركات، أساطيل، سيارات تنفيذية، سيارات ركاب وعائلية، ومركبات دفع رباعي بمختلف الفئات والموديلات.',
+      'cat3.t1':'سيدان','cat3.t2':'دفع رباعي','cat3.t3':'أساطيل شركات','cat3.t4':'تنفيذية',
+      'cat.link.veh':'استعراض المركبات',
+      'catalog.eyebrow':'المعدات المتاحة','catalog.h2':'كتالوج التوريد',
+      'catalog.p':'اختر من بين باقة واسعة من المعدات والمركبات الجاهزة للتوريد الفوري بأفضل الأسعار وأعلى المواصفات',
+      'filter.all':'الكل','filter.heavy':'ثقيل','filter.light':'خفيف','filter.cars':'مركبات',
+      'feat.eyebrow':'لماذا الشعبات','feat.h2':'أربعة أسباب لاختيارنا',
+      'feat.p':'التزامنا الراسخ بالجودة والشفافية والخدمة المتميزة جعلنا الخيار الأول للعديد من الشركات والمؤسسات',
+      'feat1.h':'توريد فوري','feat1.p':'مخزون جاهز للتسليم في أقصر وقت ممكن، مع إمكانية التوريد لكافة مدن المملكة دون استثناء',
+      'feat2.h':'ضمانات شاملة','feat2.p':'جميع المعدات والمركبات تأتي مع ضمان رسمي يشمل القطع والصيانة الدورية وفقاً للمواصفات',
+      'feat3.h':'حلول تمويلية','feat3.p':'برامج تمويل وتأجير منتهي بالتمليك بالشراكة مع أكبر البنوك وشركات التمويل في المملكة',
+      'feat4.h':'دعم متواصل','feat4.p':'فريق فني متخصص متاح على مدار الساعة، بالإضافة إلى توفر قطع الغيار الأصلية في مستودعاتنا',
+      'serv.eyebrow':'خدماتنا','serv.h2':'أكثر من مجرد توريد',
+      'serv.p':'منظومة خدمات متكاملة مصممة لتوفير قيمة حقيقية لعملائنا في كل مرحلة من مراحل المشروع',
+      'serv1.h':'توريد المعدات والمركبات','serv1.p':'توريد جميع أنواع معدات النقل الثقيل والخفيف والمركبات من العلامات التجارية الموثوقة بمواصفات مطابقة لمتطلبات السوق السعودي.',
+      'serv2.h':'الصيانة وقطع الغيار','serv2.p':'عقود صيانة دورية وتوريد قطع الغيار الأصلية مع ضمان أوقات استجابة قياسية لتقليل توقف معدات العميل.',
+      'serv3.h':'التأجير قصير وطويل الأمد','serv3.p':'خيارات تأجير مرنة للأفراد والشركات بأسعار تنافسية مع إمكانية التأجير المنتهي بالتمليك حسب الحاجة.',
+      'serv4.h':'الاستشارات الفنية','serv4.p':'فريق من المهندسين والخبراء جاهز لتقديم استشارات فنية متخصصة لاختيار المعدات الأنسب لطبيعة مشروعك.',
+      'quote.h':'اطلب عرض سعر مخصص',
+      'quote.p':'أخبرنا عن احتياجاتك وسيتواصل معك فريق المبيعات المتخصص خلال 24 ساعة بعرض سعر مفصّل يلبي متطلباتك.',
+      'quote.f1':'رد خلال 24 ساعة عمل','quote.f2':'عرض سعر مفصّل ومجاني','quote.f3':'استشارة فنية مجانية','quote.f4':'خيارات تمويل مرنة','quote.f5':'ضمانات شاملة',
+      'form.namelabel':'الاسم الكامل *','form.nameph':'أدخل اسمك الكامل',
+      'form.colabel':'اسم الشركة','form.coph':'اختياري',
+      'form.tllabel':'رقم الجوال *',
+      'form.emaillabel':'البريد الإلكتروني *','form.emailph':'email@domain.com',
+      'form.typelabel':'نوع المعدات المطلوبة *',
+      'form.type0':'اختر نوع المعدات','form.type1':'معدات النقل الثقيل','form.type2':'معدات النقل الخفيف','form.type3':'مركبات وسيارات','form.type4':'متعدد / لست متأكداً',
+      'form.qtylabel':'عدد القطع المطلوبة',
+      'form.qty1':'قطعة واحدة','form.qty2':'2 - 5 قطع','form.qty3':'6 - 20 قطعة','form.qty4':'أكثر من 20 قطعة',
+      'form.detlabel':'تفاصيل إضافية','form.detph':'اذكر الموديل المطلوب، المواصفات، موعد التسليم، أو أي تفاصيل أخرى...',
+      'form.submit':'إرسال الطلب','form.wa':'إرسال الطلب عبر واتساب','form.or':'أو تواصل فوراً',
+      'form.note':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> يصلنا طلبك مباشرة على بريد المؤسسة · رد خلال 24 ساعة عمل',
+      'qc.label':'تحتاج رداً فورياً؟ تواصل معنا مباشرة:','qc.wa':'محادثة واتساب','qc.call':'اتصال هاتفي','qc.email':'بريد إلكتروني',
+      'footer.brand.p':'شريكك الأول في توريد معدات النقل الثقيل والخفيف والمركبات في المملكة العربية السعودية.',
+      'footer.links.h':'روابط سريعة','footer.cat.h':'أقسامنا','footer.contact.h':'تواصل معنا',
+      'footer.fc.heavy':'معدات النقل الثقيل','footer.fc.light':'معدات النقل الخفيف','footer.fc.cars':'المركبات والسيارات','footer.fc.parts':'قطع الغيار','footer.fc.maint':'خدمات الصيانة',
+      'footer.address':'طريق الملك فهد، الرياض<br>المملكة العربية السعودية',
+      'footer.copy':'© 2026 مؤسسة الشعبات للتجارة. جميع الحقوق محفوظة.',
+      'footer.reg':'السجل التجاري: 0000000000 | الرقم الضريبي: 300000000000003',
+    },
+    en: {
+      'topbar.serve':'Serving all regions of Saudi Arabia',
+      'nav.home':'Home','nav.cat':'Categories','nav.equip':'Equipment',
+      'nav.services':'Services','nav.quote':'Request Quote','nav.contact':'Contact Us','nav.cta':'Request Quote',
+      'hero.tag':'Certified Suppliers for Years',
+      'hero.h1':'Your Premier Partner in Supplying <span class="accent">Transport Equipment</span> — Heavy, Light & Vehicles',
+      'hero.p':'We provide the latest equipment and vehicles from the world\'s top brands, backed by comprehensive warranties, after-sales services, and flexible financing solutions tailored to your project needs in the construction, logistics, and mining sectors.',
+      'hero.cta1':'Browse Equipment','hero.cta2':'Request Free Consultation',
+      'hero.stat1':'Units & Machinery Supplied','hero.stat2':'Public & Private Sector Clients','hero.stat3':'Technical Support & Parts',
+      'hero.card.h':'2026 Catalog','hero.card.p':'Latest truck, semi-trailer, and heavy equipment models ready for immediate supply',
+      'hero.badge':'Officially<br>Certified',
+      'cat.eyebrow':'Our Main Categories','cat.h2':'A Complete Transport System of All Types',
+      'cat.p':'We specialize in supplying three main categories covering all infrastructure, transport, and logistics project needs',
+      'cat1.num':'Section — 01','cat1.h':'Heavy Transport Equipment',
+      'cat1.p':'Heavy trucks, semi-trailers, cranes, excavators, concrete mixers, dump trucks, and all equipment for large contracting and construction projects.',
+      'cat1.t1':'Semi-Trailers','cat1.t2':'Excavators','cat1.t3':'Dump Trucks','cat1.t4':'Cranes',
+      'cat.link.equip':'Browse Equipment',
+      'cat2.num':'Section — 02','cat2.h':'Light Transport Equipment',
+      'cat2.p':'Small trucks, delivery vans, pickups, refrigerated trucks, and light transport equipment for delivery services and urban logistics.',
+      'cat2.t1':'Pickup Trucks','cat2.t2':'Delivery Vans','cat2.t3':'Refrigerated','cat2.t4':'Small Trucks',
+      'cat3.num':'Section — 03','cat3.h':'Vehicles & Cars',
+      'cat3.p':'Corporate fleet vehicles, executive cars, passenger and family cars, and 4×4 SUVs across various classes and models.',
+      'cat3.t1':'Sedan','cat3.t2':'4×4 SUV','cat3.t3':'Corporate Fleets','cat3.t4':'Executive',
+      'cat.link.veh':'Browse Vehicles',
+      'catalog.eyebrow':'Available Equipment','catalog.h2':'Supply Catalog',
+      'catalog.p':'Choose from a wide range of equipment and vehicles ready for immediate supply at the best prices and highest specifications',
+      'filter.all':'All','filter.heavy':'Heavy','filter.light':'Light','filter.cars':'Vehicles',
+      'feat.eyebrow':'Why Al Shaabat','feat.h2':'Four Reasons to Choose Us',
+      'feat.p':'Our firm commitment to quality, transparency, and outstanding service has made us the first choice for many companies and institutions',
+      'feat1.h':'Immediate Supply','feat1.p':'Stock ready for delivery in the shortest possible time, with supply capability to all cities across the Kingdom without exception',
+      'feat2.h':'Comprehensive Warranties','feat2.p':'All equipment and vehicles come with an official warranty covering parts and scheduled maintenance in accordance with specifications',
+      'feat3.h':'Financing Solutions','feat3.p':'Financing and lease-to-own programs in partnership with the largest banks and financing companies in the Kingdom',
+      'feat4.h':'Continuous Support','feat4.p':'A specialized technical team available around the clock, plus genuine spare parts available in our warehouses',
+      'serv.eyebrow':'Our Services','serv.h2':'More Than Just Supply',
+      'serv.p':'A comprehensive service ecosystem designed to deliver real value to our clients at every stage of the project',
+      'serv1.h':'Equipment & Vehicle Supply','serv1.p':'Supplying all types of heavy and light transport equipment and vehicles from trusted brands with specifications compliant with Saudi market requirements.',
+      'serv2.h':'Maintenance & Spare Parts','serv2.p':'Periodic maintenance contracts and supply of genuine spare parts with guaranteed benchmark response times to minimize client equipment downtime.',
+      'serv3.h':'Short & Long-Term Rental','serv3.p':'Flexible rental options for individuals and companies at competitive prices, with lease-to-own possibilities as needed.',
+      'serv4.h':'Technical Consulting','serv4.p':'A team of engineers and experts ready to provide specialized technical consultations to select the most suitable equipment for your project.',
+      'quote.h':'Request a Custom Quote',
+      'quote.p':'Tell us about your needs and our specialized sales team will contact you within 24 hours with a detailed quote that meets your requirements.',
+      'quote.f1':'Response within 24 business hours','quote.f2':'Detailed & free price quote','quote.f3':'Free technical consultation','quote.f4':'Flexible financing options','quote.f5':'Comprehensive warranties',
+      'form.namelabel':'Full Name *','form.nameph':'Enter your full name',
+      'form.colabel':'Company Name','form.coph':'Optional',
+      'form.tllabel':'Mobile Number *',
+      'form.emaillabel':'Email Address *','form.emailph':'email@domain.com',
+      'form.typelabel':'Required Equipment Type *',
+      'form.type0':'Select equipment type','form.type1':'Heavy Transport Equipment','form.type2':'Light Transport Equipment','form.type3':'Vehicles & Cars','form.type4':'Multiple / Not Sure',
+      'form.qtylabel':'Number of Units Required',
+      'form.qty1':'One unit','form.qty2':'2 - 5 units','form.qty3':'6 - 20 units','form.qty4':'More than 20 units',
+      'form.detlabel':'Additional Details','form.detph':'Specify the required model, specifications, delivery date, or any other details...',
+      'form.submit':'Send Request','form.wa':'Send Request via WhatsApp','form.or':'Or contact us instantly',
+      'form.note':'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg> Your request reaches our inbox directly · Reply within 24 business hours',
+      'qc.label':'Need an instant reply? Contact us directly:','qc.wa':'WhatsApp Chat','qc.call':'Phone Call','qc.email':'Email',
+      'footer.brand.p':'Your premier partner in supplying heavy and light transport equipment and vehicles across Saudi Arabia.',
+      'footer.links.h':'Quick Links','footer.cat.h':'Our Categories','footer.contact.h':'Contact Us',
+      'footer.fc.heavy':'Heavy Transport Equipment','footer.fc.light':'Light Transport Equipment','footer.fc.cars':'Vehicles & Cars','footer.fc.parts':'Spare Parts','footer.fc.maint':'Maintenance Services',
+      'footer.address':'King Fahd Road, Riyadh<br>Saudi Arabia',
+      'footer.copy':'© 2026 Al Shaabat Trading Est. All rights reserved.',
+      'footer.reg':'CR: 0000000000 | VAT: 300000000000003',
+    }
+  };
+
+  // ===== Products =====
+  const products = [
+    {cat:'heavy', name:'شاحنة قاطرة - 6×4', nameEn:'Semi-Trailer Truck 6×4', desc:'محرك ديزل قوة 480 حصان، ناقل أوتوماتيكي', descEn:'480HP diesel engine, automatic transmission', price:'حسب الطلب', priceEn:'On Request', badge:'الأكثر طلباً', badgeEn:'Best Seller'},
+    {cat:'heavy', name:'حفارة هيدروليكية', nameEn:'Hydraulic Excavator', desc:'سعة دلو 1.5م³، وزن 30 طن، صناعة يابانية', descEn:'1.5m³ bucket capacity, 30-ton weight, Japanese-made', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'heavy', name:'شاحنة قلابة 8م³', nameEn:'Dump Truck 8m³', desc:'دفع 6×4، صندوق فولاذي مقوى، محرك يورو 5', descEn:'6×4 drive, reinforced steel body, Euro 5 engine', price:'حسب الطلب', priceEn:'On Request', badge:'جديد', badgeEn:'New'},
+    {cat:'heavy', name:'رافعة شوكية ثقيلة', nameEn:'Heavy Forklift', desc:'حمولة 10 طن، ارتفاع رفع 6 متر', descEn:'10-ton capacity, 6-meter lift height', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'light', name:'شاحنة 3 طن', nameEn:'3-Ton Truck', desc:'مناسبة للتوصيل داخل المدن، اقتصادية في الاستهلاك', descEn:'Ideal for urban delivery, fuel-efficient', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'light', name:'فان توصيل', nameEn:'Delivery Van', desc:'سعة 3 متر مكعب، مكيف، مناسب للأعمال التجارية', descEn:'3m³ capacity, air-conditioned, ideal for commercial use', price:'حسب الطلب', priceEn:'On Request', badge:'جديد', badgeEn:'New'},
+    {cat:'light', name:'بيك أب دفع رباعي', nameEn:'4×4 Pickup Truck', desc:'مقصورة مزدوجة، محرك V6، مناسب للمشاريع', descEn:'Dual cab, V6 engine, ideal for project sites', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'light', name:'شاحنة تبريد', nameEn:'Refrigerated Truck', desc:'وحدة تبريد -20°، عازل حراري عالي الجودة', descEn:'-20° cooling unit, high-quality thermal insulation', price:'حسب الطلب', priceEn:'On Request', badge:'مميز', badgeEn:'Featured'},
+    {cat:'cars', name:'سيارة سيدان تنفيذية', nameEn:'Executive Sedan', desc:'موديل 2026، فل أوبشن، ضمان الوكيل', descEn:'2026 model, fully loaded, dealer warranty', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'cars', name:'دفع رباعي SUV', nameEn:'4×4 SUV', desc:'محرك V8، 7 مقاعد، نظام دفع رباعي ذكي', descEn:'V8 engine, 7 seats, intelligent 4WD system', price:'حسب الطلب', priceEn:'On Request', badge:'مميز', badgeEn:'Featured'},
+    {cat:'cars', name:'سيارة عائلية', nameEn:'Family MPV', desc:'7 مقاعد، اقتصادية، مناسبة للعائلات الكبيرة', descEn:'7 seats, economical, ideal for large families', price:'حسب الطلب', priceEn:'On Request', badge:'', badgeEn:''},
+    {cat:'cars', name:'سيارة شركة اقتصادية', nameEn:'Economy Fleet Car', desc:'مناسبة للأساطيل، صيانة منخفضة، ضمان شامل', descEn:'Fleet-ready, low maintenance, comprehensive warranty', price:'حسب الطلب', priceEn:'On Request', badge:'الأكثر طلباً', badgeEn:'Best Seller'},
+  ];
+
+  const icons = {
+    heavy: '<svg class="prod-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="93" rx="46" ry="6" fill="#1a1f1c" opacity=".12"/><rect x="15" y="40" width="51" height="34" rx="3" fill="#1f4a2f"/><rect x="15" y="55" width="51" height="5" fill="#c9a14a"/><path d="M66 47h20l13 16v11H66z" fill="#7a2e2e"/><rect x="70" y="52" width="17" height="12" rx="2" fill="#d7e4db"/><rect x="13" y="74" width="88" height="6" rx="2" fill="#1a1f1c"/><circle cx="34" cy="83" r="9" fill="#26302b"/><circle cx="34" cy="83" r="4" fill="#c9a14a"/><circle cx="83" cy="83" r="9" fill="#26302b"/><circle cx="83" cy="83" r="4" fill="#c9a14a"/></svg>',
+    light: '<svg class="prod-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="92" rx="43" ry="6" fill="#1a1f1c" opacity=".12"/><path d="M18 45h45l20 10v19H18z" fill="#7a2e2e"/><path d="M64 46l17 9H64z" fill="#d7e4db"/><rect x="25" y="52" width="15" height="12" rx="2" fill="#d7e4db" opacity=".7"/><rect x="83" y="60" width="4" height="14" fill="#c9a14a"/><rect x="16" y="74" width="86" height="5" rx="2" fill="#1a1f1c"/><circle cx="35" cy="80" r="8" fill="#26302b"/><circle cx="35" cy="80" r="3.6" fill="#c9a14a"/><circle cx="80" cy="80" r="8" fill="#26302b"/><circle cx="80" cy="80" r="3.6" fill="#c9a14a"/></svg>',
+    cars: '<svg class="prod-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg"><ellipse cx="60" cy="90" rx="45" ry="6" fill="#1a1f1c" opacity=".12"/><path d="M15 67q3-13 15-14l9-9q4-4 10-4h13q8 0 13 7l8 10q11 2 16 10v6H15z" fill="#2d5a3d"/><path d="M44 42h10v14H34q3-10 10-14z" fill="#d7e4db" opacity=".85"/><path d="M58 42h11q5 0 9 7l4 7H58z" fill="#d7e4db" opacity=".85"/><rect x="15" y="68" width="90" height="6" rx="2" fill="#1a1f1c"/><circle cx="37" cy="80" r="10" fill="#26302b"/><circle cx="37" cy="80" r="4.5" fill="#c9a14a"/><circle cx="85" cy="80" r="10" fill="#26302b"/><circle cx="85" cy="80" r="4.5" fill="#c9a14a"/></svg>'
+  };
+
+  const catLabels = {
+    ar: {heavy:'نقل ثقيل', light:'نقل خفيف', cars:'مركبات'},
+    en: {heavy:'Heavy Transport', light:'Light Transport', cars:'Vehicles'}
+  };
+
+  function renderProducts(filter) {
+    if(filter !== undefined) currentFilter = filter;
+    const grid = document.getElementById('prodGrid');
+    const filtered = currentFilter === 'all' ? products : products.filter(p => p.cat === currentFilter);
+    const isEn = currentLang === 'en';
+    grid.innerHTML = filtered.map(p => {
+      const badgeText = isEn ? p.badgeEn : p.badge;
+      const isNew = p.badge === 'جديد';
+      const name = isEn ? p.nameEn : p.name;
+      const catLbl = catLabels[currentLang][p.cat];
+      const waMsg = isEn
+        ? `Hello, I'd like to inquire about: ${name} (${catLbl}). Could you send me a quote?`
+        : `مرحباً، أرغب في الاستفسار عن: ${name} (${catLbl}). هل يمكن تزويدي بعرض سعر؟`;
+      const waTitle = isEn ? 'Inquire via WhatsApp' : 'استفسار عبر واتساب';
+      return `<div class="prod-card">
+        <div class="prod-img">
+          ${badgeText ? `<span class="prod-badge ${isNew?'new':''}">${badgeText}</span>` : ''}
+          ${icons[p.cat]}
+        </div>
+        <div class="prod-info">
+          <span class="prod-cat">${catLbl}</span>
+          <h4>${name}</h4>
+          <p class="prod-desc">${isEn ? p.descEn : p.desc}</p>
+          <div class="prod-foot">
+            <span class="prod-price">${isEn ? p.priceEn : p.price}</span>
+            <div class="prod-actions">
+              <button class="prod-btn" data-name="${name.replace(/"/g,'&quot;')}" data-cat="${p.cat}">${isEn ? 'Request Quote' : 'طلب عرض'}</button>
+              <a class="prod-wa" href="${waLink(waMsg)}" target="_blank" rel="noopener" title="${waTitle}" aria-label="${waTitle}">
+                <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+
+    // ربط زر "طلب عرض" — يملأ النموذج تلقائياً وينتقل إليه
+    grid.querySelectorAll('.prod-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const name = btn.dataset.name;
+        const cat = btn.dataset.cat;
+        const typeSel = document.querySelector('#quoteForm select[name="type"]');
+        const details = document.querySelector('#quoteForm textarea[name="details"]');
+        const typeMap = {heavy:1, light:2, cars:3};
+        if (typeSel && typeMap[cat]) typeSel.selectedIndex = typeMap[cat];
+        if (details) {
+          details.value = (currentLang === 'en' ? 'Requested unit: ' : 'المعدة المطلوبة: ') + name;
+        }
+        document.getElementById('quote').scrollIntoView({behavior:'smooth'});
+        setTimeout(() => details && details.focus(), 600);
+      });
+    });
+  }
+
+  renderProducts();
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      renderProducts(btn.dataset.filter);
+    });
+  });
+
+  // ===== Language Switcher =====
+  function setLang(lang) {
+    currentLang = lang;
+    document.documentElement.lang = lang;
+    document.documentElement.dir = lang === 'ar' ? 'rtl' : 'ltr';
+    document.getElementById('langAr').classList.toggle('active', lang === 'ar');
+    document.getElementById('langEn').classList.toggle('active', lang === 'en');
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const v = T[lang]?.[el.dataset.i18n];
+      if (v !== undefined) el.textContent = v;
+    });
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const v = T[lang]?.[el.dataset.i18nHtml];
+      if (v !== undefined) el.innerHTML = v;
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      const v = T[lang]?.[el.dataset.i18nPlaceholder];
+      if (v !== undefined) el.placeholder = v;
+    });
+
+    renderProducts();
+    localStorage.setItem('lang', lang);
+  }
+
+  // Init from saved preference
+  if (currentLang !== 'ar') setLang(currentLang);
+
+  // Header shadow on scroll
+  const header = document.getElementById('header');
+  window.addEventListener('scroll', () => {
+    header.classList.toggle('scrolled', window.scrollY > 30);
+  });
+
+  // Mobile nav
+  document.getElementById('mobileToggle').addEventListener('click', () => {
+    document.getElementById('nav').classList.toggle('open');
+  });
+  document.querySelectorAll('#nav a').forEach(a => {
+    a.addEventListener('click', () => document.getElementById('nav').classList.remove('open'));
+  });
+
+  // Active nav link on scroll
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('#nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => { if (window.scrollY >= s.offsetTop - 200) current = s.id; });
+    navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+  });
+
+  // ===== إرسال الطلب على البريد (Formspree عبر AJAX) =====
+  const quoteForm = document.getElementById('quoteForm');
+  const submitBtn = document.getElementById('submitBtn');
+  const formStatus = document.getElementById('formStatus');
+  const submitOriginal = submitBtn.innerHTML;
+
+  // أيقونات الحالة
+  const ICON_OK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>';
+  const ICON_ERR = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v4m0 4h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/></svg>';
+
+  function showStatus(type, html) {
+    formStatus.className = 'form-status ' + type;
+    formStatus.innerHTML = (type === 'success' ? ICON_OK : ICON_ERR) + '<div>' + html + '</div>';
+    formStatus.hidden = false;
+  }
+
+  quoteForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const isEn = currentLang === 'en';
+    formStatus.hidden = true;
+
+    // حالة التحميل: سبينر + تعطيل الزر
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<span class="spinner"></span><span>' + (isEn ? 'Sending...' : 'جارٍ الإرسال...') + '</span>';
+
+    fetch(quoteForm.action, {
+      method: quoteForm.method,
+      body: new FormData(quoteForm),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        showStatus('success', isEn
+          ? '<strong>Your request has been sent successfully!</strong>Our sales team will contact you within 24 business hours.'
+          : '<strong>تم إرسال طلبك بنجاح!</strong>سيتواصل معك فريق المبيعات خلال 24 ساعة عمل.');
+        quoteForm.reset();
+        formStatus.scrollIntoView({behavior:'smooth', block:'center'});
+      } else {
+        throw new Error('bad response');
+      }
+    }).catch(() => {
+      // تعذّر الإرسال — نوفّر بدائل تواصل فورية
+      showStatus('error', isEn
+        ? '<strong>Sending failed.</strong>Please try again, or contact us directly via <a href="' + waLink('Hello, I would like to request a quote.') + '" target="_blank" rel="noopener">WhatsApp</a> or call <a href="tel:0572693653">0572693653</a>.'
+        : '<strong>تعذّر إرسال الطلب.</strong>حاول مرة أخرى، أو تواصل معنا مباشرة عبر <a href="' + waLink('مرحباً، أرغب في طلب عرض سعر.') + '" target="_blank" rel="noopener">واتساب</a> أو اتصل على <a href="tel:0572693653">0572693653</a>.');
+    }).finally(() => {
+      submitBtn.disabled = false;
+      submitBtn.innerHTML = submitOriginal;
+    });
+  });
+
+  // ===== زر العودة للأعلى =====
+  const backTop = document.getElementById('backTop');
+  window.addEventListener('scroll', () => {
+    backTop.classList.toggle('show', window.scrollY > 600);
+  }, {passive:true});
+  backTop.addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+
+</body>
+</html>

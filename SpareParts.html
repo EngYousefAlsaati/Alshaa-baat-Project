@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>الشعبات | Alshaebat — توريد قطع غيار المعدّات والمركبات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#1f3a2e;       /* الأخضر الداكن من الشعار */
+    --green-deep:#13241c;
+    --red:#7a1d22;         /* الأحمر العنابي من الشعار */
+    --red-deep:#5a0f14;
+    --cream:#f5f1e8;       /* خلفية كريمية */
+    --paper:#ede7d8;
+    --ink:#13150f;         /* نص أساسي */
+    --ink-soft:#3a3a30;
+    --line:#cbc4ad;
+    --accent:#c98a2b;      /* لمسة برتقالية صناعية */
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:var(--cream);color:var(--ink);font-family:'Tajawal',sans-serif;-webkit-font-smoothing:antialiased}
+  body{overflow-x:hidden}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  button{font-family:inherit;cursor:pointer;border:none;background:none}
+
+  /* ============ شريط علوي صغير ============ */
+  .ribbon{
+    background:var(--green-deep);color:#dcd3b8;font-size:13px;
+    padding:8px 0;border-bottom:1px solid #000;
+  }
+  .ribbon-wrap{max-width:1280px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+  .ribbon-wrap span{display:inline-flex;align-items:center;gap:8px}
+  .ribbon-wrap svg{width:14px;height:14px}
+
+  /* ============ الهيدر والشعار ============ */
+  header{
+    background:var(--cream);
+    border-bottom:2px solid var(--ink);
+    position:sticky;top:0;z-index:100;
+  }
+  .nav{
+    max-width:1280px;margin:0 auto;padding:18px 28px;
+    display:flex;align-items:center;justify-content:space-between;gap:32px;
+  }
+  .brand{display:flex;align-items:center;gap:14px}
+  .logo-mark{height:64px;width:auto;flex-shrink:0;display:block}
+  .brand-text{display:flex;flex-direction:column;line-height:1}
+  .brand-ar{font-family:'Cairo',sans-serif;font-size:26px;font-weight:700;color:var(--green);letter-spacing:-.5px}
+  .brand-en{font-family:'Bebas Neue',sans-serif;font-size:14px;letter-spacing:3px;color:var(--red);margin-top:4px}
+
+  nav ul{display:flex;list-style:none;gap:30px;align-items:center}
+  nav a{font-weight:500;font-size:16px;position:relative;padding:6px 0;transition:color .2s}
+  nav a:hover{color:var(--red)}
+  nav a::after{content:"";position:absolute;bottom:-2px;right:0;width:0;height:2px;background:var(--red);transition:width .25s}
+  nav a:hover::after{width:100%}
+
+  .header-cta{display:flex;align-items:center;gap:14px}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;padding:12px 22px;
+    font-weight:700;font-size:15px;border-radius:2px;transition:all .25s;
+    border:2px solid transparent;
+  }
+  .btn-primary{background:var(--red);color:var(--cream)}
+  .btn-primary:hover{background:var(--red-deep);transform:translateY(-1px)}
+  .btn-ghost{border-color:var(--ink);color:var(--ink)}
+  .btn-ghost:hover{background:var(--ink);color:var(--cream)}
+  .btn svg{width:16px;height:16px}
+
+  .menu-toggle{display:none;width:42px;height:42px;border:2px solid var(--ink);border-radius:2px;align-items:center;justify-content:center}
+  .menu-toggle span{display:block;width:18px;height:2px;background:var(--ink);position:relative}
+  .menu-toggle span::before,.menu-toggle span::after{content:"";position:absolute;width:18px;height:2px;background:var(--ink);right:0}
+  .menu-toggle span::before{top:-6px}
+  .menu-toggle span::after{top:6px}
+
+  /* ============ البطل (Hero) ============ */
+  .hero{
+    position:relative;
+    background:
+      linear-gradient(135deg, rgba(31,58,46,.96) 0%, rgba(31,58,46,.88) 50%, rgba(122,29,34,.85) 100%),
+      repeating-linear-gradient(45deg, transparent 0 30px, rgba(255,255,255,.02) 30px 31px);
+    color:var(--cream);
+    overflow:hidden;
+    min-height:78vh;
+    display:flex;align-items:center;
+    padding:80px 0;
+  }
+  .hero::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      radial-gradient(circle at 20% 80%, rgba(201,138,43,.15), transparent 40%),
+      radial-gradient(circle at 85% 20%, rgba(122,29,34,.3), transparent 50%);
+    pointer-events:none;
+  }
+  /* خطوط هندسية زخرفية */
+  .hero-grid{
+    position:absolute;inset:0;
+    background-image:
+      linear-gradient(rgba(245,241,232,.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(245,241,232,.04) 1px, transparent 1px);
+    background-size:60px 60px;
+    pointer-events:none;
+  }
+  .hero-wrap{
+    max-width:1280px;margin:0 auto;padding:0 28px;
+    display:grid;grid-template-columns:1.2fr .8fr;gap:60px;align-items:center;
+    position:relative;z-index:2;width:100%;
+  }
+  .hero-tag{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(245,241,232,.1);border:1px solid rgba(245,241,232,.25);
+    padding:8px 16px;border-radius:2px;font-size:13px;letter-spacing:1px;
+    margin-bottom:24px;
+  }
+  .hero-tag::before{content:"";width:6px;height:6px;background:var(--accent);border-radius:50%}
+  h1.hero-title{
+    font-family:'Cairo',sans-serif;font-weight:700;
+    font-size:clamp(36px,5.5vw,68px);line-height:1.15;letter-spacing:-1px;
+    margin-bottom:24px;
+  }
+  h1.hero-title em{font-style:normal;color:var(--accent);position:relative}
+  h1.hero-title em::after{
+    content:"";position:absolute;bottom:6px;right:0;width:100%;height:8px;
+    background:var(--red);z-index:-1;opacity:.6;
+  }
+  .hero-sub{
+    font-size:19px;line-height:1.7;max-width:560px;color:#e8e0c8;margin-bottom:36px;font-weight:300;
+  }
+  .hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:48px}
+  .btn-light{background:var(--cream);color:var(--ink)}
+  .btn-light:hover{background:#fff;transform:translateY(-1px)}
+  .btn-outline-light{border-color:var(--cream);color:var(--cream)}
+  .btn-outline-light:hover{background:var(--cream);color:var(--ink)}
+
+  .hero-stats{display:flex;gap:40px;flex-wrap:wrap;padding-top:28px;border-top:1px solid rgba(245,241,232,.15)}
+  .hero-stat .num{font-family:'Bebas Neue';font-size:42px;color:var(--accent);line-height:1}
+  .hero-stat .lbl{font-size:13px;color:#c8c0a8;letter-spacing:1px;margin-top:4px}
+
+  /* بطاقة جانبية في البطل */
+  .hero-visual{
+    position:relative;
+  }
+  .hero-card{
+    background:rgba(245,241,232,.06);backdrop-filter:blur(12px);
+    border:1px solid rgba(245,241,232,.15);
+    padding:32px;border-radius:4px;
+    transform:rotate(-1deg);
+    box-shadow:0 30px 80px rgba(0,0,0,.4);
+  }
+  .hero-card-head{display:flex;justify-content:space-between;align-items:center;padding-bottom:18px;border-bottom:1px dashed rgba(245,241,232,.2);margin-bottom:20px}
+  .hero-card-head h4{font-family:'Cairo';font-size:18px}
+  .hero-card-head .badge{background:var(--accent);color:var(--ink);padding:4px 10px;font-size:11px;font-weight:700;letter-spacing:1px}
+  .part-line{display:flex;justify-content:space-between;align-items:center;padding:10px 0;font-size:14px;color:#d8d0b8}
+  .part-line:not(:last-child){border-bottom:1px solid rgba(245,241,232,.08)}
+  .part-line .code{font-family:'Bebas Neue';letter-spacing:1px;color:var(--accent)}
+  .part-line .status{display:inline-flex;align-items:center;gap:6px;font-size:12px}
+  .dot{width:7px;height:7px;border-radius:50%;background:#5fbf6a}
+  .dot.amber{background:#e0a236}
+  .stamp{
+    position:absolute;top:-20px;left:-20px;
+    width:120px;height:120px;border:2px solid var(--accent);border-radius:50%;
+    display:flex;align-items:center;justify-content:center;text-align:center;
+    font-family:'Cairo';color:var(--accent);font-size:14px;line-height:1.3;
+    transform:rotate(-12deg);background:rgba(19,36,28,.6);
+    padding:14px;
+  }
+
+  /* ============ شريط الثقة ============ */
+  .trust-bar{background:var(--green-deep);padding:22px 0;border-top:1px solid #000}
+  .trust-wrap{max-width:1280px;margin:0 auto;padding:0 28px;display:flex;justify-content:space-around;align-items:center;flex-wrap:wrap;gap:24px}
+  .trust-item{color:#c8c0a8;font-size:14px;display:flex;align-items:center;gap:10px}
+  .trust-item svg{width:22px;height:22px;color:var(--accent)}
+
+  /* ============ الأقسام العامة ============ */
+  section{padding:100px 0;position:relative}
+  .container{max-width:1280px;margin:0 auto;padding:0 28px}
+  .section-head{margin-bottom:60px;display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap}
+  .section-head-inner{max-width:680px}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-family:'Bebas Neue';letter-spacing:3px;color:var(--red);font-size:14px;margin-bottom:14px;
+  }
+  .eyebrow::before{content:"";width:30px;height:2px;background:var(--red)}
+  h2.section-title{
+    font-family:'Cairo';font-weight:700;
+    font-size:clamp(32px,4vw,52px);line-height:1.15;color:var(--ink);letter-spacing:-1px;
+  }
+  h2.section-title span{color:var(--red)}
+  .section-desc{font-size:17px;color:var(--ink-soft);margin-top:16px;line-height:1.75;max-width:600px}
+
+  /* ============ الأقسام (التصنيفات) ============ */
+  .cats{background:var(--paper);position:relative}
+  .cats::before{
+    content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    background:linear-gradient(90deg,transparent,var(--ink),transparent);
+  }
+  .cats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:2px solid var(--ink);background:var(--ink)}
+  .cat{
+    background:var(--cream);padding:36px 28px;
+    transition:all .35s;cursor:pointer;
+    border:1px solid transparent;
+    position:relative;overflow:hidden;
+    min-height:260px;display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .cat:hover{background:var(--green);color:var(--cream)}
+  .cat:hover .cat-num,.cat:hover .cat-arrow{color:var(--accent)}
+  .cat:hover h3{color:var(--cream)}
+  .cat-num{font-family:'Bebas Neue';font-size:14px;letter-spacing:2px;color:var(--red);margin-bottom:auto}
+  .cat-icon{width:48px;height:48px;color:var(--green);margin:14px 0 18px;transition:color .35s}
+  .cat:hover .cat-icon{color:var(--accent)}
+  .cat h3{font-family:'Cairo';font-size:22px;font-weight:600;margin-bottom:8px;transition:color .35s}
+  .cat p{font-size:14px;color:var(--ink-soft);line-height:1.6;margin-bottom:18px}
+  .cat:hover p{color:#d8d0b8}
+  .cat-arrow{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--red);transition:color .35s}
+  .cat-arrow svg{width:14px;height:14px;transition:transform .3s}
+  .cat:hover .cat-arrow svg{transform:translateX(-6px)}
+
+  /* ============ المنتجات المميزة ============ */
+  .products-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+  .product{
+    background:var(--cream);border:1px solid var(--line);
+    transition:all .3s;overflow:hidden;display:flex;flex-direction:column;
+  }
+  .product:hover{border-color:var(--ink);transform:translateY(-4px);box-shadow:0 20px 40px rgba(19,21,15,.12)}
+  .product-img{
+    aspect-ratio:4/3;
+    background:radial-gradient(circle at 50% 40%, #ffffff, var(--paper) 72%);
+    position:relative;
+    display:flex;align-items:center;justify-content:center;overflow:hidden;
+    border-bottom:1px solid var(--line);
+  }
+  .product-img::before{
+    content:"";position:absolute;inset:0;
+    background-image:
+      linear-gradient(45deg,transparent 48%,rgba(19,21,15,.04) 48% 52%,transparent 52%),
+      linear-gradient(-45deg,transparent 48%,rgba(19,21,15,.04) 48% 52%,transparent 52%);
+    background-size:18px 18px;
+  }
+  /* هالة خلف الرسم التوضيحي */
+  .product-img::after{
+    content:"";position:absolute;width:150px;height:150px;border-radius:50%;
+    background:radial-gradient(circle, rgba(31,58,46,.10), transparent 70%);
+    z-index:1;transition:transform .45s ease;
+  }
+  .product:hover .product-img::after{transform:scale(1.15)}
+  /* الرسم التوضيحي للقطعة */
+  .product-img svg{position:relative;z-index:2}
+  .product-img .product-illu{
+    width:74%;height:74%;
+    filter:drop-shadow(0 8px 14px rgba(19,21,15,.18));
+    transition:transform .45s cubic-bezier(.2,.7,.3,1.2);
+  }
+  .product:hover .product-illu{transform:scale(1.07) translateY(-3px)}
+
+  /* ============ شريط الفلترة ============ */
+  .cat-filter{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-bottom:34px}
+  .cat-filter .fbtn{
+    background:var(--cream);border:1.5px solid var(--line);color:var(--ink-soft);
+    padding:9px 20px;border-radius:50px;font-family:inherit;font-size:14px;font-weight:600;
+    cursor:pointer;transition:all .2s;
+  }
+  .cat-filter .fbtn:hover{border-color:var(--green);color:var(--green)}
+  .cat-filter .fbtn.active{background:var(--green);color:var(--cream);border-color:var(--green)}
+  .product.hidden{display:none}
+
+  .badge-new{
+    position:absolute;top:14px;right:14px;z-index:3;
+    background:var(--red);color:var(--cream);font-family:'Bebas Neue';letter-spacing:2px;
+    font-size:12px;padding:5px 10px;
+  }
+  .badge-stock{
+    position:absolute;top:14px;left:14px;z-index:3;
+    background:var(--green);color:var(--cream);font-size:11px;padding:5px 10px;
+    display:inline-flex;align-items:center;gap:5px;
+  }
+  .product-body{padding:24px;flex:1;display:flex;flex-direction:column}
+  .product-cat{font-size:12px;color:var(--red);letter-spacing:2px;font-family:'Bebas Neue';margin-bottom:8px}
+  .product h4{font-family:'Cairo';font-size:19px;font-weight:600;margin-bottom:6px;line-height:1.4}
+  .product-code{font-size:13px;color:var(--ink-soft);margin-bottom:14px;font-family:'Bebas Neue';letter-spacing:1px}
+  .product-meta{display:flex;justify-content:space-between;align-items:center;padding-top:16px;border-top:1px dashed var(--line);margin-top:auto}
+  .product-price{font-family:'Cairo';font-size:20px;font-weight:700;color:var(--green)}
+  .product-price small{font-size:12px;color:var(--ink-soft);font-weight:400;margin-right:4px}
+  .ask{
+    background:var(--ink);color:var(--cream);padding:9px 16px;font-size:13px;font-weight:700;
+    transition:background .25s;display:inline-flex;align-items:center;gap:6px;
+  }
+  .ask:hover{background:var(--red)}
+  .ask svg{width:13px;height:13px}
+
+  /* ============ لماذا نحن ============ */
+  .why{
+    background:var(--green-deep);color:var(--cream);
+    position:relative;overflow:hidden;
+  }
+  .why::before{
+    content:"";position:absolute;inset:0;
+    background-image:radial-gradient(circle at 90% 10%, rgba(201,138,43,.12),transparent 50%);
+  }
+  .why .eyebrow{color:var(--accent)}
+  .why .eyebrow::before{background:var(--accent)}
+  .why h2.section-title{color:var(--cream)}
+  .why h2.section-title span{color:var(--accent)}
+  .why .section-desc{color:#c8c0a8}
+  .features{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(245,241,232,.1);border:1px solid rgba(245,241,232,.15);margin-top:20px}
+  .feat{padding:40px 32px;background:var(--green-deep);transition:background .3s}
+  .feat:hover{background:#0b1812}
+  .feat-num{font-family:'Bebas Neue';font-size:54px;color:var(--accent);line-height:1;opacity:.4}
+  .feat h4{font-family:'Cairo';font-size:22px;margin:18px 0 12px;font-weight:600}
+  .feat p{color:#c8c0a8;line-height:1.75;font-size:15px}
+
+  /* ============ كيف نعمل ============ */
+  .how{background:var(--cream)}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;position:relative}
+  .step{padding:32px 24px;border-right:1px dashed var(--line);position:relative}
+  .step:first-child{border-right:none}
+  .step-num{
+    width:54px;height:54px;border-radius:50%;
+    background:var(--red);color:var(--cream);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Bebas Neue';font-size:24px;margin-bottom:20px;
+    position:relative;
+  }
+  .step:hover .step-num{background:var(--green)}
+  .step h4{font-family:'Cairo';font-size:20px;margin-bottom:10px;font-weight:600}
+  .step p{color:var(--ink-soft);line-height:1.7;font-size:14px}
+
+  /* ============ نموذج الطلب ============ */
+  .order{
+    background:
+      linear-gradient(rgba(31,58,46,.94),rgba(31,58,46,.94)),
+      repeating-linear-gradient(-45deg, transparent 0 40px, rgba(245,241,232,.03) 40px 41px);
+    color:var(--cream);
+  }
+  .order .eyebrow{color:var(--accent)}
+  .order .eyebrow::before{background:var(--accent)}
+  .order h2.section-title{color:var(--cream)}
+  .order h2.section-title span{color:var(--accent)}
+  .order-grid{display:grid;grid-template-columns:1fr 1.4fr;gap:60px;align-items:start}
+  .order-info h3{font-family:'Cairo';font-size:24px;margin-bottom:20px}
+  .order-info p{color:#d8d0b8;line-height:1.85;margin-bottom:24px;font-size:16px}
+  .contact-block{display:flex;gap:14px;align-items:flex-start;padding:18px 0;border-bottom:1px solid rgba(245,241,232,.12)}
+  .contact-block:last-child{border-bottom:none}
+  .contact-block svg{width:22px;height:22px;color:var(--accent);flex-shrink:0;margin-top:2px}
+  .contact-block .lbl{font-size:13px;color:#a8a088;letter-spacing:1px;margin-bottom:4px}
+  .contact-block .val{font-size:16px;font-weight:500}
+
+  form{background:var(--cream);padding:40px;color:var(--ink);border-radius:2px;position:relative}
+  form::before{
+    content:"";position:absolute;top:-10px;right:-10px;width:60px;height:60px;
+    background:var(--red);z-index:-1;
+  }
+  form h3{font-family:'Cairo';font-size:22px;margin-bottom:8px}
+  form .form-sub{color:var(--ink-soft);font-size:14px;margin-bottom:26px}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}
+  .field{display:flex;flex-direction:column}
+  .field label{font-size:13px;font-weight:700;margin-bottom:7px;letter-spacing:.5px}
+  .field input,.field select,.field textarea{
+    padding:13px 14px;border:1.5px solid var(--line);background:var(--paper);
+    font-family:inherit;font-size:15px;color:var(--ink);transition:border-color .2s;
+    border-radius:2px;
+  }
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--green);background:#fff}
+  .field textarea{resize:vertical;min-height:110px}
+  .field.full{grid-column:1/-1}
+  .submit-btn{
+    width:100%;background:var(--green);color:var(--cream);padding:16px;
+    font-weight:700;font-size:16px;letter-spacing:1px;
+    transition:all .25s;margin-top:8px;
+    display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  }
+  .submit-btn:hover{background:var(--ink)}
+  .submit-btn svg{width:18px;height:18px}
+
+  /* ============ الفوتر ============ */
+  footer{background:var(--ink);color:#c8c0a8;padding:80px 0 0}
+  .footer-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:50px;padding-bottom:60px;border-bottom:1px solid #2a2a20}
+  .foot-brand .logo-mark{height:60px;width:auto;margin-bottom:18px}
+  .foot-brand p{line-height:1.85;font-size:15px;margin:18px 0}
+  .socials{display:flex;gap:10px;margin-top:20px}
+  .socials a{
+    width:40px;height:40px;border:1px solid #2a2a20;display:flex;align-items:center;justify-content:center;
+    transition:all .25s;color:#c8c0a8;
+  }
+  .socials a:hover{background:var(--accent);border-color:var(--accent);color:var(--ink)}
+  .socials svg{width:18px;height:18px}
+
+  .foot-col h5{font-family:'Cairo';color:var(--cream);font-size:17px;margin-bottom:22px;font-weight:600;position:relative;padding-bottom:12px}
+  .foot-col h5::after{content:"";position:absolute;bottom:0;right:0;width:30px;height:2px;background:var(--accent)}
+  .foot-col ul{list-style:none}
+  .foot-col li{margin-bottom:12px;font-size:14px;transition:color .2s;cursor:pointer;display:flex;align-items:center;gap:8px}
+  .foot-col li:hover{color:var(--accent)}
+  .foot-col li::before{content:"›";color:var(--accent);font-size:18px;line-height:1}
+
+  .copyright{padding:24px 0;text-align:center;font-size:13px;letter-spacing:1px;color:#8a8270}
+  .copyright span{color:var(--accent)}
+
+  /* ============ تجاوب ============ */
+  @media (max-width: 1024px){
+    .hero-wrap{grid-template-columns:1fr;gap:50px}
+    .cats-grid{grid-template-columns:repeat(2,1fr)}
+    .products-grid{grid-template-columns:repeat(2,1fr)}
+    .features{grid-template-columns:repeat(2,1fr)}
+    .steps{grid-template-columns:repeat(2,1fr)}
+    .step{border-right:none;border-bottom:1px dashed var(--line);padding-bottom:24px}
+    .order-grid{grid-template-columns:1fr;gap:40px}
+    .footer-grid{grid-template-columns:repeat(2,1fr);gap:40px}
+  }
+  @media (max-width: 720px){
+    nav ul{display:none}
+    .menu-toggle{display:flex}
+    .header-cta .btn{display:none}
+    .cats-grid,.products-grid,.features,.steps,.footer-grid{grid-template-columns:1fr}
+    section{padding:70px 0}
+    .hero{padding:60px 0;min-height:auto}
+    .form-row{grid-template-columns:1fr}
+    .hero-stats{gap:24px}
+    .stamp{display:none}
+    .section-head{flex-direction:column;align-items:flex-start}
+  }
+
+  /* ============ أنيميشن ============ */
+  @keyframes fadeUp{
+    from{opacity:0;transform:translateY(24px)}
+    to{opacity:1;transform:translateY(0)}
+  }
+  .hero-tag,h1.hero-title,.hero-sub,.hero-actions,.hero-stats{animation:fadeUp .8s ease both}
+  h1.hero-title{animation-delay:.1s}
+  .hero-sub{animation-delay:.25s}
+  .hero-actions{animation-delay:.4s}
+  .hero-stats{animation-delay:.55s}
+  .hero-visual{animation:fadeUp 1s ease .3s both}
+
+  /* ============ ظهور تدريجي عند التمرير ============ */
+  .reveal{opacity:0;transform:translateY(30px);transition:opacity .7s ease,transform .7s ease}
+  .reveal.in{opacity:1;transform:translateY(0)}
+  @media (prefers-reduced-motion: reduce){
+    .reveal{opacity:1;transform:none;transition:none}
+  }
+
+  /* ============ هيدر عند التمرير + القسم النشط ============ */
+  header.scrolled{box-shadow:0 6px 24px rgba(19,21,15,.12)}
+  nav a.active{color:var(--red)}
+  nav a.active::after{width:100%}
+
+  /* ============ قائمة الجوال ============ */
+  .menu-toggle span{transition:background .2s}
+  .menu-toggle span::before,.menu-toggle span::after{transition:transform .25s,top .25s}
+  .menu-toggle.open span{background:transparent}
+  .menu-toggle.open span::before{top:0;transform:rotate(45deg)}
+  .menu-toggle.open span::after{top:0;transform:rotate(-45deg)}
+  @media (max-width: 720px){
+    nav{position:fixed;inset:0 0 auto 0;top:0;background:var(--green-deep);
+      transform:translateY(-110%);transition:transform .35s ease;z-index:90;
+      padding:90px 28px 32px;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+    nav.open{transform:translateY(0)}
+    nav ul{display:flex !important;flex-direction:column;gap:6px}
+    nav a{display:block;color:var(--cream);font-size:18px;padding:14px 4px;
+      border-bottom:1px solid rgba(245,241,232,.1)}
+    nav a:hover{color:var(--accent)}
+    nav a::after{display:none}
+    .menu-toggle{position:relative;z-index:95}
+    body.nav-open{overflow:hidden}
+  }
+
+  /* ============ شريط البحث عن قطعة ============ */
+  .product-search{
+    display:flex;align-items:center;gap:12px;flex-wrap:wrap;
+    background:var(--cream);border:2px solid var(--line);border-radius:2px;
+    padding:6px 6px 6px 18px;margin-bottom:38px;max-width:620px;
+    transition:border-color .2s;
+  }
+  .product-search:focus-within{border-color:var(--green)}
+  .product-search svg{width:20px;height:20px;color:var(--green);flex-shrink:0}
+  .product-search input{
+    flex:1;min-width:160px;border:none;background:none;font-family:inherit;
+    font-size:16px;color:var(--ink);padding:10px 0;
+  }
+  .product-search input:focus{outline:none}
+  .product-search .clear-search{
+    background:var(--ink);color:var(--cream);padding:10px 18px;font-size:14px;
+    font-weight:700;border-radius:2px;transition:background .2s;white-space:nowrap;
+  }
+  .product-search .clear-search:hover{background:var(--red)}
+  .no-results{
+    grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--ink-soft);
+    font-size:17px;border:1px dashed var(--line);
+  }
+  .no-results strong{color:var(--red)}
+
+  /* ============ أزرار عائمة ============ */
+  .fab-stack{position:fixed;bottom:24px;left:24px;z-index:200;display:flex;flex-direction:column;gap:12px}
+  .fab{
+    width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 8px 24px rgba(0,0,0,.25);transition:transform .25s,box-shadow .25s;
+  }
+  .fab:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.32)}
+  .fab svg{width:26px;height:26px}
+  .fab-email{background:var(--red);color:var(--cream);position:relative}
+  .fab-email:hover{background:var(--red-deep)}
+  .fab-email::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--red);animation:fabPulse 2.2s ease-out infinite}
+  @keyframes fabPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+  @media (prefers-reduced-motion: reduce){.fab-email::after{animation:none}}
+  .fab-top{
+    background:var(--green);color:var(--cream);width:48px;height:48px;
+    opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s,transform .25s,background .2s;
+  }
+  .fab-top:hover{background:var(--red)}
+  .fab-top.show{opacity:1;visibility:visible}
+  .fab-top svg{width:22px;height:22px}
+
+  /* ============ رسالة نجاح الإرسال ============ */
+  .toast{
+    position:fixed;bottom:28px;right:50%;transform:translate(50%,140%);
+    background:var(--green);color:var(--cream);padding:16px 26px;border-radius:4px;
+    box-shadow:0 14px 40px rgba(0,0,0,.3);z-index:300;display:flex;align-items:center;gap:12px;
+    font-weight:600;font-size:15px;transition:transform .4s cubic-bezier(.2,.9,.3,1.3);max-width:90vw;
+  }
+  .toast.show{transform:translate(50%,0)}
+  .toast svg{width:22px;height:22px;color:var(--accent);flex-shrink:0}
+</style>
+</head>
+<body>
+
+<!-- شعار الشعبات الأصلي -->
+
+<!-- ============ شريط علوي ============ -->
+<div class="ribbon">
+  <div class="ribbon-wrap">
+    <span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5z"/></svg>
+      تواصل معنا: 0572693653
+    </span>
+    <span>
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      الأحد – الخميس | 8 صباحاً – 6 مساءً
+    </span>
+    <span>توريد لجميع مناطق المملكة 🇸🇦</span>
+  </div>
+</div>
+
+<!-- ============ الهيدر ============ -->
+<header>
+  <div class="nav">
+    <a href="#" class="brand">
+      <img class="logo-mark" src="Logo Al shaabat.jpeg" alt="مؤسسة الشعبات للتجارة">
+    </a>
+    <nav>
+      <ul>
+        <li><a href="#home">الرئيسية</a></li>
+        <li><a href="#cats">الأقسام</a></li>
+        <li><a href="#products">قطع الغيار</a></li>
+        <li><a href="#why">من نحن</a></li>
+        <li><a href="#how">آلية العمل</a></li>
+        <li><a href="#order">طلب عرض سعر</a></li>
+      </ul>
+    </nav>
+    <div class="header-cta">
+      <a href="#order" class="btn btn-primary">
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+        اطلب الآن
+      </a>
+      <button type="button" class="menu-toggle" aria-label="القائمة"><span></span></button>
+    </div>
+  </div>
+</header>
+
+<!-- ============ البطل ============ -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-wrap">
+    <div>
+      <span class="hero-tag">مزوّد معتمد · توريد B2B · جودة أصلية</span>
+      <h1 class="hero-title">قِطَع غِيار <em>أصلية</em><br/>لمعدّاتك ومركباتك<br/>في كل ميدان عمل.</h1>
+      <p class="hero-sub">
+        شركة الشعبات تورّد قطع غيار المعدّات الثقيلة والمركبات لمختلف القطاعات: الإنشاءات، النقل، التشغيل والصيانة، والمشاريع الحكومية. خبرة عميقة، شبكة موردين موثوقة، وتسليم في الموعد.
+      </p>
+      <div class="hero-actions">
+        <a href="#order" class="btn btn-light">
+          اطلب عرض سعر مجاني
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m-7 7h18"/></svg>
+        </a>
+        <a href="#cats" class="btn btn-outline-light">تصفّح الأقسام</a>
+      </div>
+      <div class="hero-stats">
+        <div class="hero-stat"><div class="num">+12K</div><div class="lbl">قطعة غيار في الشبكة</div></div>
+        <div class="hero-stat"><div class="num">+500</div><div class="lbl">عميل مؤسسي</div></div>
+        <div class="hero-stat"><div class="num">15</div><div class="lbl">سنة خبرة</div></div>
+        <div class="hero-stat"><div class="num">48h</div><div class="lbl">متوسط التسليم</div></div>
+      </div>
+    </div>
+
+    <div class="hero-visual">
+      <div class="stamp">قطع<br/><strong>أصلية</strong><br/>مضمونة ✓</div>
+      <div class="hero-card">
+        <div class="hero-card-head">
+          <h4>طلب توريد · #AS-2410</h4>
+          <span class="badge">جاري التجهيز</span>
+        </div>
+        <div class="part-line">
+          <span>مرشّح زيت كاتربلر CAT 320</span>
+          <span class="code">P-441</span>
+          <span class="status"><span class="dot"></span>متوفر</span>
+        </div>
+        <div class="part-line">
+          <span>طقم فحمات فرامل HINO 700</span>
+          <span class="code">B-118</span>
+          <span class="status"><span class="dot"></span>متوفر</span>
+        </div>
+        <div class="part-line">
+          <span>مضخة هيدروليكية كوماتسو</span>
+          <span class="code">H-205</span>
+          <span class="status"><span class="dot amber"></span>قيد التوريد</span>
+        </div>
+        <div class="part-line">
+          <span>إطار صناعي 23.5 × 25</span>
+          <span class="code">T-090</span>
+          <span class="status"><span class="dot"></span>متوفر</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ شريط الثقة ============ -->
+<div class="trust-bar">
+  <div class="trust-wrap">
+    <div class="trust-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+      ضمان أصالة كل قطعة
+    </div>
+    <div class="trust-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+      فواتير ضريبية رسمية
+    </div>
+    <div class="trust-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/></svg>
+      تسليم لكل مناطق المملكة
+    </div>
+    <div class="trust-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+      دفع آمن · تحويل بنكي · شيك
+    </div>
+    <div class="trust-item">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636l-3.536 3.536m0 5.656l3.536 3.536M9.172 9.172L5.636 5.636m3.536 9.192l-3.536 3.536M21 12a9 9 0 11-18 0 9 9 0 0118 0zm-5 0a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+      دعم فني متخصّص
+    </div>
+  </div>
+</div>
+
+<!-- ============ الأقسام ============ -->
+<section class="cats" id="cats">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-inner">
+        <span class="eyebrow">أقسامنا</span>
+        <h2 class="section-title">نُورّد لكل <span>قطاع</span> ولكل ميدان.</h2>
+        <p class="section-desc">من المعدّات الثقيلة في مواقع الإنشاء إلى المركبات التجارية في خطوط التشغيل اليومية — شبكتنا تغطّيك بكل ما تحتاج.</p>
+      </div>
+      <a href="#order" class="btn btn-ghost">طلب قطعة محددة
+        <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7m-7 7h18"/></svg>
+      </a>
+    </div>
+
+    <div class="cats-grid">
+      <div class="cat">
+        <span class="cat-num">01 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+        <h3>المعدّات الثقيلة</h3>
+        <p>قطع غيار كاتربلر، كوماتسو، فولفو، JCB، هيتاشي للمعدّات الإنشائية.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">02 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l3.414 3.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1"/></svg>
+        <h3>الشاحنات والقاطرات</h3>
+        <p>توريد قطع غيار هينو، مرسيدس، فولفو، مان، إيسوزو، سكانيا.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">03 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        <h3>المولّدات والمحرّكات</h3>
+        <p>مرشّحات، مضخّات، حسّاسات، وقطع تشغيل للمولّدات الصناعية.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">04 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-linecap="round"/><circle cx="12" cy="12" r="3" stroke-linecap="round"/><path stroke-linecap="round" stroke-linejoin="round" d="M12 3v3m0 12v3m9-9h-3M6 12H3"/></svg>
+        <h3>الإطارات الصناعية</h3>
+        <p>إطارات للمعدّات والشاحنات بمقاسات متعددة، علامات عالمية.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">05 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14.121 15.536c-1.171 1.952-3.07 1.952-4.242 0-1.172-1.953-1.172-5.119 0-7.072 1.171-1.952 3.07-1.952 4.242 0M8 10.5h4m-4 3h4m9-1.5a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+        <h3>الزيوت والشحوم</h3>
+        <p>زيوت محرّك، هيدروليك، نواقل حركة من علامات معتمدة.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">06 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z"/><path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4"/></svg>
+        <h3>الكهرباء والإلكترونيات</h3>
+        <p>بطاريات، مولّدات، حسّاسات، أسلاك، وحدات تحكّم إلكترونية.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">07 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+        <h3>الفلاتر والمصافي</h3>
+        <p>فلاتر زيت، هواء، ديزل، هيدروليك للمعدّات والمحرّكات.</p>
+        <span class="cat-arrow">عرض القطع
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+
+      <div class="cat">
+        <span class="cat-num">08 / القسم</span>
+        <svg class="cat-icon" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/></svg>
+        <h3>طلبات خاصة</h3>
+        <p>توريد قطع نادرة وحسب الطلب — أرسل لنا الرقم التسلسلي ونحن نوفّرها.</p>
+        <span class="cat-arrow">طلب خاص
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+        </span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ المنتجات ============ -->
+<section id="products">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-inner">
+        <span class="eyebrow">قطع مختارة</span>
+        <h2 class="section-title">قطع <span>الأكثر طلباً</span> من عملائنا.</h2>
+        <p class="section-desc">عيّنة من القطع المتوفّرة لدينا — لطلب أي قطعة بمواصفات محددة، استخدم نموذج عرض السعر.</p>
+      </div>
+    </div>
+
+    <div class="product-search">
+      <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+      <input type="text" id="partSearch" placeholder="ابحث باسم القطعة، التصنيف، أو رقم الكود..." aria-label="بحث عن قطعة">
+      <button type="button" class="clear-search" id="clearSearch">مسح</button>
+    </div>
+
+    <div class="cat-filter" id="catFilter">
+      <button type="button" class="fbtn active" data-cat="all">الكل</button>
+      <button type="button" class="fbtn" data-cat="filters">فلاتر</button>
+      <button type="button" class="fbtn" data-cat="brakes">فرامل</button>
+      <button type="button" class="fbtn" data-cat="hydraulic">هيدروليك</button>
+      <button type="button" class="fbtn" data-cat="tires">إطارات</button>
+      <button type="button" class="fbtn" data-cat="electric">كهرباء</button>
+      <button type="button" class="fbtn" data-cat="transmission">نقل حركة</button>
+    </div>
+
+    <div class="products-grid" id="productsGrid">
+      <article class="product" data-cat="filters">
+        <div class="product-img">
+          <span class="badge-new">جديد</span>
+          <span class="badge-stock"><span class="dot"></span> متوفر</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="pg1" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#13241c"/><stop offset=".5" stop-color="#3d6f4f"/><stop offset="1" stop-color="#1f3a2e"/></linearGradient></defs>
+            <ellipse cx="60" cy="106" rx="30" ry="6" fill="#13150f" opacity=".12"/>
+            <rect x="36" y="34" width="48" height="64" rx="9" fill="url(#pg1)"/>
+            <rect x="42" y="23" width="36" height="15" rx="5" fill="#0f1c15"/>
+            <circle cx="60" cy="23" r="7" fill="#c98a2b"/>
+            <g stroke="#f5f1e8" stroke-width="2.5" opacity=".35" stroke-linecap="round"><line x1="44" y1="50" x2="76" y2="50"/><line x1="44" y1="62" x2="76" y2="62"/><line x1="44" y1="74" x2="76" y2="74"/><line x1="44" y1="86" x2="76" y2="86"/></g>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">مرشّحات / فلاتر</span>
+          <h4>مرشّح زيت كاتربلر C13</h4>
+          <span class="product-code">CODE: CAT-1R0716</span>
+          <div class="product-meta">
+            <span class="product-price"><small>يبدأ من</small>185 ر.س</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="brakes">
+        <div class="product-img">
+          <span class="badge-stock"><span class="dot"></span> متوفر</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="pg2" cx=".45" cy=".4" r=".7"><stop offset="0" stop-color="#aab4bb"/><stop offset="1" stop-color="#3c454c"/></radialGradient></defs>
+            <ellipse cx="58" cy="106" rx="34" ry="6" fill="#13150f" opacity=".12"/>
+            <path d="M74 40 h16 a7 7 0 0 1 7 7 v24 a7 7 0 0 1-7 7 h-16 z" fill="#7a1d22"/>
+            <rect x="70" y="44" width="7" height="30" rx="2" fill="#5c1418"/>
+            <circle cx="56" cy="58" r="40" fill="url(#pg2)"/>
+            <circle cx="56" cy="58" r="40" fill="none" stroke="#2b3138" stroke-width="2" opacity=".4"/>
+            <circle cx="56" cy="58" r="16" fill="#2b3138"/>
+            <circle cx="56" cy="58" r="6" fill="#6b7780"/>
+            <g fill="#1f3a2e"><circle cx="56" cy="32" r="3"/><circle cx="56" cy="84" r="3"/><circle cx="30" cy="58" r="3"/><circle cx="82" cy="58" r="3"/></g>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">فرامل</span>
+          <h4>طقم فحمات HINO 700</h4>
+          <span class="product-code">CODE: HN-S4475</span>
+          <div class="product-meta">
+            <span class="product-price"><small>يبدأ من</small>420 ر.س</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="hydraulic">
+        <div class="product-img">
+          <span class="badge-new">حصري</span>
+          <span class="badge-stock"><span class="dot"></span> متوفر</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="pg3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b7780"/><stop offset="1" stop-color="#3c454c"/></linearGradient></defs>
+            <ellipse cx="60" cy="106" rx="32" ry="6" fill="#13150f" opacity=".12"/>
+            <rect x="40" y="26" width="15" height="18" rx="3" fill="#2b3138"/>
+            <rect x="28" y="42" width="52" height="52" rx="11" fill="url(#pg3)"/>
+            <rect x="74" y="50" width="22" height="13" rx="3" fill="#1f3a2e"/>
+            <rect x="74" y="70" width="22" height="13" rx="3" fill="#7a1d22"/>
+            <circle cx="54" cy="68" r="16" fill="#2b3138"/>
+            <circle cx="54" cy="68" r="8" fill="#c98a2b"/>
+            <circle cx="54" cy="68" r="3" fill="#13150f"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">هيدروليك</span>
+          <h4>مضخة هيدروليكية كوماتسو</h4>
+          <span class="product-code">CODE: KM-708-2L-00600</span>
+          <div class="product-meta">
+            <span class="product-price"><small>عرض سعر</small>اتصل بنا</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="tires">
+        <div class="product-img">
+          <span class="badge-stock"><span class="dot"></span> متوفر</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="pg4" cx=".5" cy=".5" r=".5"><stop offset=".55" stop-color="#1a1f22"/><stop offset="1" stop-color="#343b40"/></radialGradient></defs>
+            <ellipse cx="60" cy="107" rx="36" ry="6" fill="#13150f" opacity=".14"/>
+            <circle cx="60" cy="58" r="44" fill="url(#pg4)"/>
+            <circle cx="60" cy="58" r="44" fill="none" stroke="#0c0f10" stroke-width="4" stroke-dasharray="7 6"/>
+            <circle cx="60" cy="58" r="26" fill="#aab4bb"/>
+            <circle cx="60" cy="58" r="26" fill="none" stroke="#6b7780" stroke-width="4"/>
+            <circle cx="60" cy="58" r="9" fill="#3c454c"/>
+            <g fill="#6b7780"><circle cx="60" cy="40" r="3.2"/><circle cx="60" cy="76" r="3.2"/><circle cx="42" cy="58" r="3.2"/><circle cx="78" cy="58" r="3.2"/></g>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">إطارات</span>
+          <h4>إطار صناعي Bridgestone 23.5×25</h4>
+          <span class="product-code">CODE: BS-VLT-2325</span>
+          <div class="product-meta">
+            <span class="product-price"><small>يبدأ من</small>4,250 ر.س</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="electric">
+        <div class="product-img">
+          <span class="badge-stock"><span class="dot"></span> متوفر</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><linearGradient id="pg5" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#3d6f4f"/><stop offset="1" stop-color="#13241c"/></linearGradient></defs>
+            <ellipse cx="60" cy="104" rx="34" ry="6" fill="#13150f" opacity=".12"/>
+            <rect x="40" y="32" width="13" height="14" rx="2" fill="#7a1d22"/>
+            <rect x="67" y="32" width="13" height="14" rx="2" fill="#3c454c"/>
+            <rect x="28" y="44" width="64" height="50" rx="6" fill="url(#pg5)"/>
+            <rect x="28" y="44" width="64" height="13" rx="6" fill="#0f1c15"/>
+            <g stroke="#c98a2b" stroke-width="3" stroke-linecap="round"><line x1="42" y1="74" x2="54" y2="74"/><line x1="48" y1="68" x2="48" y2="80"/><line x1="68" y1="74" x2="80" y2="74"/></g>
+            <line x1="60" y1="62" x2="60" y2="90" stroke="#f5f1e8" stroke-width="2" opacity=".3"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">كهرباء</span>
+          <h4>بطارية صناعية 200 أمبير</h4>
+          <span class="product-code">CODE: VRT-N200</span>
+          <div class="product-meta">
+            <span class="product-price"><small>يبدأ من</small>890 ر.س</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+
+      <article class="product" data-cat="transmission">
+        <div class="product-img">
+          <span class="badge-stock"><span class="dot amber"></span> قيد التوريد</span>
+          <svg class="product-illu" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+            <defs><radialGradient id="pg6" cx=".5" cy=".42" r=".62"><stop offset="0" stop-color="#aab4bb"/><stop offset="1" stop-color="#3c454c"/></radialGradient></defs>
+            <ellipse cx="60" cy="106" rx="30" ry="6" fill="#13150f" opacity=".12"/>
+            <g fill="#2b3138">
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(0 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(45 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(90 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(135 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(180 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(225 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(270 60 58)"/>
+              <rect x="54" y="14" width="12" height="18" rx="2" transform="rotate(315 60 58)"/>
+            </g>
+            <circle cx="60" cy="58" r="30" fill="url(#pg6)"/>
+            <circle cx="60" cy="58" r="30" fill="none" stroke="#2b3138" stroke-width="2" opacity=".3"/>
+            <circle cx="60" cy="58" r="12" fill="#1a1f22"/>
+            <circle cx="60" cy="58" r="5" fill="#6b7780"/>
+          </svg>
+        </div>
+        <div class="product-body">
+          <span class="product-cat">نقل حركة</span>
+          <h4>جلبة نقل حركة فولفو FH16</h4>
+          <span class="product-code">CODE: VL-21073531</span>
+          <div class="product-meta">
+            <span class="product-price"><small>عرض سعر</small>اتصل بنا</span>
+            <button class="ask">اطلب
+              <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M11 19l-7-7 7-7"/></svg>
+            </button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ لماذا نحن ============ -->
+<section class="why" id="why">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-inner">
+        <span class="eyebrow">لماذا الشعبات</span>
+        <h2 class="section-title">شريك توريد <span>تعتمد عليه</span> — لا فقط مورّد.</h2>
+        <p class="section-desc">نتعامل مع كل طلب كأنه طلبنا. خبرة فنية تساعدك تختار القطعة الصح، وشبكة موردين تضمن لك الوصول لما تحتاج بسرعة.</p>
+      </div>
+    </div>
+
+    <div class="features">
+      <div class="feat">
+        <div class="feat-num">01</div>
+        <h4>قطع أصلية مضمونة</h4>
+        <p>نتعامل مع وكلاء معتمدين فقط. كل قطعة تأتي بشهادة منشأ وضمان رسمي ضد عيوب التصنيع.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">02</div>
+        <h4>توريد سريع ومرن</h4>
+        <p>مخزون جاهز للقطع الأكثر طلباً، وقدرة استيراد سريع للقطع الخاصة خلال 7–21 يوم عمل.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">03</div>
+        <h4>أسعار تنافسية للجملة</h4>
+        <p>نوفّر عروض أسعار خاصة للشركات والمشاريع وعقود التوريد طويلة المدى مع خصومات الكميات.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">04</div>
+        <h4>دعم فني متخصّص</h4>
+        <p>فريق فنّي يساعدك تحدد القطعة بدقة من الرقم التسلسلي أو حتى من صورة، ويرشدك للبديل الأنسب.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">05</div>
+        <h4>تكامل مع إدارة الأسطول</h4>
+        <p>نقدّم تقارير دورية للشركات الكبيرة لإدارة مخزون قطع غيار أسطولها وخفض التكاليف.</p>
+      </div>
+      <div class="feat">
+        <div class="feat-num">06</div>
+        <h4>تغطية كل المملكة</h4>
+        <p>شحن لكل المدن والمواقع — بما فيها مواقع المشاريع البعيدة — عبر شبكة شركاء شحن موثوقين.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ آلية العمل ============ -->
+<section class="how" id="how">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-head-inner">
+        <span class="eyebrow">آلية العمل</span>
+        <h2 class="section-title">كيف نخدمك من <span>الطلب إلى التسليم</span>.</h2>
+        <p class="section-desc">عملية واضحة، شفّافة، وسريعة — صُمّمت لتوفّر وقت فريقك الفنّي ولوجستياتك.</p>
+      </div>
+    </div>
+
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <h4>أرسل طلبك</h4>
+        <p>عبر النموذج، واتساب، أو الإيميل — مع الرقم التسلسلي أو وصف القطعة، أو حتى صورة منها.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <h4>عرض سعر خلال ساعات</h4>
+        <p>يطّلع فريقنا على الطلب ويرسل لك عرض سعر مفصّل خلال 4–24 ساعة عمل بحد أقصى.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <h4>تأكيد وتجهيز</h4>
+        <p>بعد التأكيد، نُجهّز الطلب من المخزون أو نباشر استيراده مع تحديثات دورية لك.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <h4>تسليم وضمان</h4>
+        <p>نسلّمك القطعة بفاتورة ضريبية رسمية وضمان كامل — مع متابعة ما بعد التوريد.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ نموذج الطلب ============ -->
+<section class="order" id="order">
+  <div class="container">
+    <div class="order-grid">
+      <div class="order-info">
+        <div class="eyebrow">طلب تسعيرة</div>
+        <h2 class="section-title">احصل على <span>أفضل سعر</span> لطلبك</h2>
+        <p>نحن نوفر لك أجود أنواع قطع الغيار مع ضمان الجودة وسرعة التوصيل. املأ النموذج وسيتواصل معك فريقنا في أقرب وقت.</p>
+        
+        <div class="contact-block">
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 5a2 2 0 012-2h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 013 5z"/></svg>
+          <div>
+            <div class="lbl">اتصل بنا</div>
+            <div class="val">0572693653</div>
+          </div>
+        </div>
+      </div>
+
+      <form action="https://formspree.io/f/mvzllzqz" method="POST">
+        <h3>اطلب قطعة غيار الآن</h3>
+        <p class="form-sub">سيصلنا طلبك مباشرة على البريد الإلكتروني</p>
+        
+        <div class="form-row">
+          <div class="field">
+            <label>الاسم الكامل</label>
+            <input type="text" name="الاسم" placeholder="مثال: محمد أحمد" required>
+          </div>
+          <div class="field">
+            <label>رقم الجوال</label>
+            <input type="tel" name="الجوال" placeholder="05xxxxxxxx" required>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="field">
+            <label>البريد الإلكتروني</label>
+            <input type="email" name="email" placeholder="example@mail.com" required>
+          </div>
+          <div class="field">
+            <label>نوع المعدة / المركبة</label>
+            <select name="نوع_المعدة">
+              <option value="heavy">معدات ثقيلة</option>
+              <option value="trucks">شاحنات</option>
+              <option value="cars">مركبات خفيفة</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field full">
+          <label>تفاصيل القطعة المطلوبة</label>
+          <textarea name="تفاصيل_الطلب" placeholder="اكتب رقم القطعة أو وصفاً لها..." required></textarea>
+        </div>
+
+        <input type="hidden" name="_subject" value="طلب جديد من موقع الشعبات">
+
+        <button type="submit" class="submit-btn">
+          إرسال الطلب الآن
+          <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============ الفوتر ============ -->
+<footer>
+  <div class="container">
+    <div class="footer-grid">
+      <div class="foot-brand">
+        <img class="logo-mark" src="Logo Al shaabat.jpeg" alt="مؤسسة الشعبات للتجارة">
+        <p>مزوّد متخصّص في توريد قطع غيار المعدّات والمركبات في المملكة العربية السعودية — جودة، سرعة، التزام.</p>
+        <div class="socials">
+          <a href="#" aria-label="تويتر"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg></a>
+          <a href="#" aria-label="انستقرام"><svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="لينكدإن"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M19 0h-14C2.24 0 0 2.24 0 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5V5c0-2.76-2.24-5-5-5zM8 19H5V8h3v11zM6.5 6.73c-.97 0-1.75-.79-1.75-1.76s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.76-1.75 1.76zM20 19h-3v-5.6c0-3.37-4-3.11-4 0V19h-3V8h3v1.76c1.4-2.58 7-2.77 7 2.47V19z"/></svg></a>
+          <a href="#" aria-label="واتساب"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163a11.867 11.867 0 01-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.817 11.817 0 018.413 3.488 11.824 11.824 0 013.48 8.414c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 01-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 001.595 5.39l-.999 3.648 3.893-.737z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="foot-col">
+        <h5>المنصة</h5>
+        <ul>
+          <li>الرئيسية</li>
+          <li>الأقسام</li>
+          <li>قطع الغيار</li>
+          <li>من نحن</li>
+          <li>تواصل معنا</li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>أقسام مختارة</h5>
+        <ul>
+          <li>المعدّات الثقيلة</li>
+          <li>الشاحنات</li>
+          <li>الإطارات الصناعية</li>
+          <li>الفلاتر</li>
+          <li>الزيوت والشحوم</li>
+        </ul>
+      </div>
+
+      <div class="foot-col">
+        <h5>للتواصل</h5>
+        <ul>
+          <li style="list-style:none" >☎ 0572693653</li>
+          <li style="list-style:none" >✉ alshabaat@alshabaat.com</li>
+          <li style="list-style:none" >📍 الرياض، السعودية</li>
+          <li style="list-style:none" >🕐 الأحد–الخميس · 8ص–6م</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="copyright">
+    © 2026 <span>الشعبات Alshaebat</span> · جميع الحقوق محفوظة · سجل تجاري ١٠١٠XXXXXX
+  </div>
+</footer>
+
+<!-- ============ أزرار عائمة ============ -->
+<div class="fab-stack">
+  <a class="fab fab-email" href="https://outlook.live.com/mail/0/deeplink/compose?to=alshabaat@alshabaat.com&subject=استفسار%20عن%20قطع%20غيار&body=السلام%20عليكم،%0D%0A%0D%0Aأرغب%20في%20الاستفسار%20عن:" target="_blank" rel="noopener" aria-label="تواصل عبر Outlook" title="راسلنا عبر Outlook على alshabaat@alshabaat.com">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+  </a>
+  <button class="fab fab-top" id="backTop" aria-label="العودة للأعلى">
+    <svg fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 15l7-7 7 7"/></svg>
+  </button>
+</div>
+
+<!-- ============ رسالة نجاح ============ -->
+<div class="toast" id="toast" role="status" aria-live="polite">
+  <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+  <span id="toastMsg">تم إرسال طلبك بنجاح! سنتواصل معك قريباً.</span>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var header = document.querySelector('header');
+  var nav = document.querySelector('nav');
+  var toggle = document.querySelector('.menu-toggle');
+
+  /* ---- تنعيم التمرير لكل الروابط الداخلية ---- */
+  function smoothTo(target){
+    if(target) target.scrollIntoView({behavior:'smooth',block:'start'});
+  }
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click',function(e){
+      var sel = a.getAttribute('href');
+      if(sel.length<2) return;
+      var t = document.querySelector(sel);
+      if(t){ e.preventDefault(); closeMenu(); smoothTo(t); }
+    });
+  });
+
+  /* ---- قائمة الجوال ---- */
+  function closeMenu(){
+    if(!nav) return;
+    nav.classList.remove('open');
+    if(toggle) toggle.classList.remove('open');
+    document.body.classList.remove('nav-open');
+  }
+  if(toggle){
+    toggle.addEventListener('click',function(){
+      var open = nav.classList.toggle('open');
+      toggle.classList.toggle('open',open);
+      document.body.classList.toggle('nav-open',open);
+    });
+  }
+
+  /* ---- أزرار "اطلب" تملأ النموذج باسم القطعة ---- */
+  var orderForm = document.querySelector('#order form');
+  var detailsField = orderForm ? orderForm.querySelector('textarea') : null;
+  document.querySelectorAll('.product .ask').forEach(function(btn){
+    btn.addEventListener('click',function(){
+      var card = btn.closest('.product');
+      var nameEl = card ? card.querySelector('h4') : null;
+      var codeEl = card ? card.querySelector('.product-code') : null;
+      if(detailsField && nameEl){
+        var txt = 'أرغب في طلب: ' + nameEl.textContent.trim();
+        if(codeEl) txt += ' — ' + codeEl.textContent.trim();
+        detailsField.value = txt;
+      }
+      var order = document.getElementById('order');
+      if(order){ smoothTo(order); setTimeout(function(){ if(detailsField) detailsField.focus(); },600); }
+    });
+  });
+
+  /* ---- بطاقات الأقسام تنقل لنموذج الطلب وتملأ النوع ---- */
+  document.querySelectorAll('.cat').forEach(function(cat){
+    cat.addEventListener('click',function(){
+      var title = cat.querySelector('h3');
+      if(detailsField && title){
+        detailsField.value = 'أبحث عن قطع غيار ضمن قسم: ' + title.textContent.trim();
+      }
+      var order = document.getElementById('order');
+      if(order) smoothTo(order);
+    });
+  });
+
+  /* ---- بحث/فلترة المنتجات ---- */
+  var search = document.getElementById('partSearch');
+  var clearBtn = document.getElementById('clearSearch');
+  var grid = document.getElementById('productsGrid');
+  var products = grid ? Array.prototype.slice.call(grid.querySelectorAll('.product')) : [];
+  var noResults = null;
+  if(grid){
+    noResults = document.createElement('div');
+    noResults.className = 'no-results';
+    noResults.style.display = 'none';
+    noResults.innerHTML = 'لا توجد نتائج مطابقة لبحثك. جرّب كلمة أخرى أو <strong>اطلب القطعة مباشرة</strong> عبر النموذج.';
+    grid.appendChild(noResults);
+  }
+  var activeCat = 'all';
+  function filterProducts(){
+    var q = (search ? search.value : '').trim().toLowerCase();
+    var visible = 0;
+    products.forEach(function(p){
+      var matchText = p.textContent.toLowerCase().indexOf(q) !== -1;
+      var matchCat = (activeCat === 'all') || (p.getAttribute('data-cat') === activeCat);
+      var show = matchText && matchCat;
+      p.style.display = show ? '' : 'none';
+      if(show) visible++;
+    });
+    if(noResults) noResults.style.display = (visible === 0) ? 'block' : 'none';
+  }
+  if(search){
+    search.addEventListener('input',filterProducts);
+  }
+  if(clearBtn){
+    clearBtn.addEventListener('click',function(){ search.value=''; filterProducts(); search.focus(); });
+  }
+  // أزرار الفلترة بالتصنيف
+  var filterBar = document.getElementById('catFilter');
+  if(filterBar){
+    filterBar.querySelectorAll('.fbtn').forEach(function(btn){
+      btn.addEventListener('click',function(){
+        filterBar.querySelectorAll('.fbtn').forEach(function(b){ b.classList.remove('active'); });
+        btn.classList.add('active');
+        activeCat = btn.getAttribute('data-cat');
+        filterProducts();
+      });
+    });
+  }
+
+  /* ---- هيدر عند التمرير + زر العودة للأعلى ---- */
+  var backTop = document.getElementById('backTop');
+  function onScroll(){
+    var y = window.pageYOffset || document.documentElement.scrollTop;
+    if(header) header.classList.toggle('scrolled', y>10);
+    if(backTop) backTop.classList.toggle('show', y>500);
+  }
+  window.addEventListener('scroll',onScroll,{passive:true});
+  onScroll();
+  if(backTop){
+    backTop.addEventListener('click',function(){ window.scrollTo({top:0,behavior:'smooth'}); });
+  }
+
+  /* ---- تمييز القسم النشط في القائمة ---- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('nav a[href^="#"]'));
+  var sections = navLinks.map(function(a){ return document.querySelector(a.getAttribute('href')); });
+  if('IntersectionObserver' in window){
+    var navObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){
+          navLinks.forEach(function(l){ l.classList.remove('active'); });
+          var i = sections.indexOf(en.target);
+          if(i>-1) navLinks[i].classList.add('active');
+        }
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    sections.forEach(function(s){ if(s) navObs.observe(s); });
+  }
+
+  /* ---- ظهور تدريجي عند التمرير ---- */
+  var revealTargets = document.querySelectorAll(
+    '.cat,.product,.feat,.step,.section-head,.order-info,#order form,.trust-item'
+  );
+  if('IntersectionObserver' in window){
+    var revObs = new IntersectionObserver(function(entries){
+      entries.forEach(function(en){
+        if(en.isIntersecting){ en.target.classList.add('in'); revObs.unobserve(en.target); }
+      });
+    },{rootMargin:'0px 0px -8% 0px',threshold:.08});
+    revealTargets.forEach(function(el,i){
+      el.classList.add('reveal');
+      el.style.transitionDelay = (Math.min(i%4,3)*0.06) + 's';
+      revObs.observe(el);
+    });
+  }
+
+  /* ---- إرسال النموذج عبر AJAX + رسالة نجاح ---- */
+  var toast = document.getElementById('toast');
+  var toastMsg = document.getElementById('toastMsg');
+  function showToast(msg,ok){
+    if(!toast) return;
+    if(toastMsg) toastMsg.textContent = msg;
+    toast.style.background = ok ? 'var(--green)' : 'var(--red)';
+    toast.classList.add('show');
+    setTimeout(function(){ toast.classList.remove('show'); },4500);
+  }
+  if(orderForm){
+    orderForm.addEventListener('submit',function(e){
+      e.preventDefault();
+      var btn = orderForm.querySelector('.submit-btn');
+      var original = btn ? btn.innerHTML : '';
+      if(btn){ btn.disabled = true; btn.textContent = 'جارٍ الإرسال...'; }
+      fetch(orderForm.action,{
+        method:'POST',
+        body:new FormData(orderForm),
+        headers:{'Accept':'application/json'}
+      }).then(function(res){
+        if(res.ok){
+          orderForm.reset();
+          showToast('تم إرسال طلبك بنجاح! سنتواصل معك قريباً.',true);
+        }else{
+          showToast('تعذّر الإرسال. يرجى الاتصال على 0572693653.',false);
+        }
+      }).catch(function(){
+        showToast('تعذّر الإرسال. تحقّق من الاتصال أو اتصل بنا مباشرة.',false);
+      }).finally(function(){
+        if(btn){ btn.disabled = false; btn.innerHTML = original; }
+      });
+    });
+  }
+})();
+</script>
+</body>
+</html>
