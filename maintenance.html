@@ -1,0 +1,1286 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منصة الشعبات لصيانة المعدّات</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.47.0/tabler-icons.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<!-- Firebase (للمزامنة بين الأجهزة) -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-database-compat.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --primary:#0f172a;
+  --primary-hover:#1e293b;
+  --accent:#2563eb;
+  --accent-light:#eff6ff;
+  --success:#15803d;
+  --success-bg:#f0fdf4;
+  --warning:#b45309;
+  --warning-bg:#fffbeb;
+  --danger:#dc2626;
+  --danger-bg:#fef2f2;
+  --info:#0369a1;
+  --info-bg:#f0f9ff;
+  --bg:#f1f5f9;
+  --surface:#ffffff;
+  --border:#e2e8f0;
+  --border-light:#f1f5f9;
+  --text:#0f172a;
+  --text-muted:#64748b;
+  --text-light:#94a3b8;
+  --radius:12px;
+  --radius-sm:8px;
+  --shadow:0 1px 3px rgba(0,0,0,0.08),0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:0 4px 12px rgba(0,0,0,0.08),0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:0 10px 25px rgba(0,0,0,0.1),0 4px 10px rgba(0,0,0,0.05);
+}
+
+body{
+  font-family:'Tajawal',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.6;
+  min-height:100vh;
+}
+
+/* ─── Header ─── */
+.header{
+  background:var(--primary);
+  padding:0 32px;
+  position:sticky;
+  top:0;
+  z-index:100;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+.header-inner{
+  max-width:1200px;
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:72px;
+  gap:20px;
+}
+.brand{display:flex;align-items:center;gap:14px}
+.brand-logo{height:48px;width:auto;border-radius:8px;background:#fff;padding:4px}
+.brand-sep{width:1px;height:36px;background:rgba(255,255,255,0.15)}
+.brand-info h1{font-size:17px;font-weight:700;color:#fff;line-height:1.2}
+.brand-info p{font-size:12px;color:rgba(255,255,255,0.55);font-weight:400;margin-top:2px}
+.header-date{text-align:left;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.1);border-radius:var(--radius-sm);padding:8px 14px}
+.header-date .date-label{font-size:11px;color:rgba(255,255,255,0.45);font-weight:400;margin-bottom:2px}
+.header-date .date-val{font-size:14px;color:#fff;font-weight:600}
+
+/* ─── Layout ─── */
+.page{max-width:1200px;margin:0 auto;padding:28px 20px}
+
+/* ─── Stats ─── */
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.stat-card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  padding:20px;
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  display:flex;
+  align-items:center;
+  gap:16px;
+  transition:box-shadow .2s;
+}
+.stat-card:hover{box-shadow:var(--shadow-md)}
+.stat-icon{
+  width:48px;height:48px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:22px;flex-shrink:0;
+}
+.stat-icon.total{background:#f1f5f9;color:#475569}
+.stat-icon.ok{background:var(--success-bg);color:var(--success)}
+.stat-icon.warn{background:var(--warning-bg);color:var(--warning)}
+.stat-icon.danger{background:var(--danger-bg);color:var(--danger)}
+.stat-body .stat-label{font-size:12px;color:var(--text-muted);font-weight:500;margin-bottom:4px}
+.stat-body .stat-value{font-size:28px;font-weight:800;line-height:1}
+.stat-value.c-ok{color:var(--success)}
+.stat-value.c-warn{color:var(--warning)}
+.stat-value.c-danger{color:var(--danger)}
+
+/* ─── Main card ─── */
+.card{
+  background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+  border:1px solid var(--border);
+  overflow:hidden;
+}
+
+/* ─── Tabs ─── */
+.tabs{
+  display:flex;
+  gap:0;
+  border-bottom:1px solid var(--border);
+  padding:0 4px;
+  background:var(--surface);
+  overflow-x:auto;
+}
+.tab-btn{
+  padding:16px 18px;
+  background:transparent;
+  border:none;
+  border-bottom:2px solid transparent;
+  cursor:pointer;
+  font-size:13.5px;
+  font-weight:500;
+  color:var(--text-muted);
+  font-family:'Tajawal',sans-serif;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  white-space:nowrap;
+  transition:color .15s,border-color .15s;
+  margin-bottom:-1px;
+}
+.tab-btn i{font-size:16px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{
+  color:var(--accent);
+  border-bottom-color:var(--accent);
+  font-weight:700;
+}
+.tab-btn.highlight{
+  color:#fff;
+  background:var(--accent);
+  border-radius:var(--radius-sm);
+  margin:8px 4px;
+  padding:8px 16px;
+  border-bottom:none !important;
+}
+.tab-btn.highlight:hover{background:#1d4ed8}
+
+/* ─── Section ─── */
+.section{padding:24px;display:block}
+.section.hidden{display:none}
+
+/* ─── Toolbar ─── */
+.toolbar{display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.toolbar input,.toolbar select{
+  padding:9px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-size:13.5px;
+  font-family:'Tajawal',sans-serif;
+  color:var(--text);
+  background:var(--surface);
+  direction:rtl;
+  transition:border-color .15s,box-shadow .15s;
+}
+.toolbar input{flex:1;min-width:200px}
+.toolbar select{min-width:170px}
+.toolbar input:focus,.toolbar select:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.12);
+}
+
+/* ─── Table ─── */
+.table-wrap{overflow-x:auto}
+.tbl{width:100%;border-collapse:collapse;font-size:13.5px}
+.tbl thead th{
+  padding:10px 14px;
+  text-align:right;
+  font-size:11.5px;
+  font-weight:700;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  background:var(--bg);
+  border-bottom:1px solid var(--border);
+}
+.tbl tbody tr{border-bottom:1px solid var(--border-light);transition:background .12s}
+.tbl tbody tr:last-child{border-bottom:none}
+.tbl tbody tr:hover{background:#f8fafc}
+.tbl td{padding:13px 14px;vertical-align:middle}
+.tbl .eq-name{font-weight:600;color:var(--text)}
+.tbl .eq-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+/* ─── Badges ─── */
+.badge{
+  display:inline-flex;
+  align-items:center;
+  gap:5px;
+  padding:4px 10px;
+  border-radius:20px;
+  font-size:12px;
+  font-weight:600;
+  white-space:nowrap;
+}
+.badge::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.b-ok{background:var(--success-bg);color:var(--success)}.b-ok::before{background:var(--success)}
+.b-warn{background:var(--warning-bg);color:var(--warning)}.b-warn::before{background:var(--warning)}
+.b-info{background:var(--info-bg);color:var(--info)}.b-info::before{background:var(--info)}
+.b-danger{background:var(--danger-bg);color:var(--danger)}.b-danger::before{background:var(--danger)}
+
+/* ─── Buttons ─── */
+.btn-primary{
+  background:var(--primary);
+  color:#fff;
+  border:none;
+  padding:11px 24px;
+  border-radius:var(--radius-sm);
+  cursor:pointer;
+  font-size:14px;
+  font-family:'Tajawal',sans-serif;
+  font-weight:600;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  transition:background .15s,transform .1s,box-shadow .15s;
+}
+.btn-primary:hover{background:var(--primary-hover);box-shadow:var(--shadow-md)}
+.btn-primary:active{transform:scale(.98)}
+.btn-icon{
+  background:transparent;
+  border:1px solid var(--border);
+  width:32px;height:32px;
+  border-radius:6px;
+  cursor:pointer;
+  color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;
+  font-size:15px;
+  transition:background .12s,color .12s,border-color .12s;
+}
+.btn-icon:hover{background:var(--danger-bg);color:var(--danger);border-color:var(--danger)}
+
+/* ─── Form ─── */
+.form-section{
+  background:var(--bg);
+  border-radius:var(--radius);
+  padding:24px;
+  margin-bottom:20px;
+}
+.form-section h3{
+  font-size:14px;
+  font-weight:700;
+  color:var(--text-muted);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:18px;
+  padding-bottom:10px;
+  border-bottom:1px solid var(--border);
+}
+.form-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.form-grid .field{display:flex;flex-direction:column;gap:6px}
+.form-grid label{font-size:13px;color:var(--text-muted);font-weight:600}
+input[type=text],input[type=number],input[type=date],select,textarea{
+  padding:10px 13px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  font-size:13.5px;
+  font-family:'Tajawal',sans-serif;
+  color:var(--text);
+  background:var(--surface);
+  direction:rtl;
+  transition:border-color .15s,box-shadow .15s;
+  width:100%;
+}
+input:focus,select:focus,textarea:focus{
+  outline:none;
+  border-color:var(--accent);
+  box-shadow:0 0 0 3px rgba(37,99,235,0.12);
+}
+textarea{resize:vertical;min-height:80px}
+
+/* ─── Log entries ─── */
+.log-entry{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-start;
+  gap:12px;
+  padding:16px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  background:var(--surface);
+  transition:box-shadow .15s;
+}
+.log-entry:hover{box-shadow:var(--shadow)}
+.log-entry-body{flex:1}
+.log-entry-name{font-weight:700;font-size:14px;margin-bottom:4px}
+.log-entry-meta{font-size:12px;color:var(--text-muted);display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.log-entry-meta .dot{color:var(--border);font-size:16px;line-height:1}
+.log-entry-notes{font-size:13px;color:#475569;margin-top:8px;padding:8px 12px;background:var(--bg);border-radius:6px;border-right:3px solid var(--accent)}
+
+/* ─── Upcoming ─── */
+.upcoming-item{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  padding:14px 16px;
+  border-radius:var(--radius-sm);
+  border:1px solid var(--border);
+  margin-bottom:10px;
+  background:var(--surface);
+  transition:box-shadow .15s;
+}
+.upcoming-item:hover{box-shadow:var(--shadow)}
+.upcoming-left{display:flex;align-items:center;gap:12px}
+.upcoming-icon{width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;font-size:18px;background:var(--bg);color:var(--text-muted);flex-shrink:0}
+.upcoming-name{font-weight:600;font-size:14px}
+.upcoming-sub{font-size:12px;color:var(--text-muted);margin-top:2px}
+.upcoming-right{text-align:left;flex-shrink:0}
+.upcoming-urgency{font-weight:700;font-size:13px;display:flex;align-items:center;gap:4px}
+.upcoming-date{font-size:12px;color:var(--text-muted);margin-top:2px}
+
+/* ─── Summary bar ─── */
+.summary-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px 18px;
+  background:var(--bg);
+  border-radius:var(--radius-sm);
+  margin-bottom:16px;
+  border:1px solid var(--border);
+  font-size:14px;
+}
+.summary-bar .cost-label{color:var(--text-muted)}
+.summary-bar .cost-value{font-weight:800;font-size:17px;color:var(--primary)}
+
+/* ─── Empty state ─── */
+.empty{
+  text-align:center;
+  padding:48px 24px;
+  color:var(--text-light);
+}
+.empty i{font-size:40px;margin-bottom:12px;display:block;opacity:.4}
+.empty p{font-size:14px}
+
+/* ─── Deadline colors ─── */
+.dl-late{color:var(--danger);font-weight:600}
+.dl-soon{color:var(--warning);font-weight:600}
+
+/* ─── Form actions ─── */
+.form-actions{display:flex;gap:10px;margin-top:20px;padding-top:20px;border-top:1px solid var(--border)}
+
+/* ─── Utility ─── */
+.th-actions{width:96px}
+.field-span-2{grid-column:span 2}
+.field-span-3{grid-column:span 3}
+.eq-cell{display:flex;align-items:center;gap:10px}
+.eq-cell-icon{width:34px;height:34px;border-radius:8px;background:var(--bg);display:flex;align-items:center;justify-content:center;color:var(--text-muted);font-size:16px;flex-shrink:0}
+.log-meta-row{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.log-meta-dot{color:var(--border);font-size:16px;line-height:1}
+.log-cost-val{color:var(--text);font-weight:600}
+.upcoming-urgency-text{font-weight:700;font-size:13px}
+.summary-cost{font-weight:800;font-size:17px;color:var(--primary)}
+.visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+.td-location{color:var(--text-muted);font-size:13px}
+.td-deadline{font-size:13px}
+.icon-sm{font-size:13px;vertical-align:middle}
+.icon-md{font-size:15px;vertical-align:middle}
+.badge-sm{font-size:11px}
+.urgency-normal{color:var(--text-muted)}
+.urgency-danger{color:var(--danger)}
+.urgency-warning{color:var(--warning)}
+
+/* ─── Header right cluster ─── */
+.header-right{display:flex;align-items:center;gap:10px;position:relative}
+.phone-btn{
+  display:flex;align-items:center;gap:8px;
+  color:#fff;text-decoration:none;
+  background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:var(--radius-sm);
+  padding:8px 16px;
+  font-size:15px;font-weight:700;
+  font-family:'Tajawal',sans-serif;
+  direction:ltr;letter-spacing:.5px;
+  transition:background .15s;
+}
+.phone-btn:hover{background:rgba(255,255,255,0.18)}
+.phone-btn i{font-size:18px;color:#4ade80}
+.qr-toggle-btn{
+  background:rgba(255,255,255,0.09);
+  border:1px solid rgba(255,255,255,0.14);
+  border-radius:var(--radius-sm);
+  width:38px;height:38px;
+  cursor:pointer;color:#fff;font-size:19px;
+  display:flex;align-items:center;justify-content:center;
+  transition:background .15s;flex-shrink:0;
+}
+.qr-toggle-btn:hover{background:rgba(255,255,255,0.2)}
+
+/* ─── QR Popup ─── */
+.qr-popup{
+  position:absolute;top:calc(100% + 14px);left:0;
+  background:#fff;border-radius:var(--radius);
+  box-shadow:var(--shadow-lg);padding:20px 20px 16px;
+  z-index:300;text-align:center;min-width:190px;
+  border:1px solid var(--border);
+}
+.qr-popup::before{
+  content:'';position:absolute;top:-7px;left:16px;
+  width:13px;height:13px;background:#fff;
+  border-top:1px solid var(--border);border-right:1px solid var(--border);
+  transform:rotate(-45deg);
+}
+.qr-popup.hidden{display:none}
+.qr-popup-title{font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:12px;letter-spacing:.4px}
+.qr-popup-phone{font-size:15px;font-weight:800;color:var(--primary);margin-top:10px;direction:ltr;letter-spacing:.5px}
+#qr-canvas img,#qr-canvas canvas,#footer-qr-canvas img,#footer-qr-canvas canvas{display:block;border-radius:6px}
+
+/* ─── Footer ─── */
+.footer{background:var(--primary);margin-top:48px}
+.footer-inner{
+  max-width:1200px;margin:0 auto;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:28px;padding:32px 20px;flex-wrap:wrap;
+}
+.footer-brand{display:flex;align-items:center;gap:14px}
+.footer-logo{height:56px;width:auto;border-radius:8px;background:#fff;padding:5px}
+.footer-name{font-size:17px;font-weight:700;color:#fff;line-height:1.2}
+.footer-sub{font-size:12px;color:rgba(255,255,255,0.45);margin-top:3px}
+.footer-contact{text-align:center}
+.footer-contact-lbl{font-size:11px;color:rgba(255,255,255,0.45);text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.footer-phone-link{
+  display:inline-flex;align-items:center;gap:10px;
+  color:#fff;text-decoration:none;font-size:22px;
+  font-weight:800;direction:ltr;letter-spacing:1px;
+  transition:color .15s;
+}
+.footer-phone-link:hover{color:#4ade80}
+.footer-phone-link i{color:#4ade80;font-size:22px}
+.footer-qr-wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+.footer-qr-lbl{font-size:11px;color:rgba(255,255,255,0.4)}
+.footer-copy{
+  max-width:1200px;margin:0 auto;
+  padding:14px 20px;border-top:1px solid rgba(255,255,255,0.08);
+  text-align:center;font-size:12px;color:rgba(255,255,255,0.3);
+}
+
+/* ─── Responsive ─── */
+@media(max-width:900px){
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .form-grid{grid-template-columns:repeat(2,1fr)}
+  .tbl .hide-sm{display:none}
+}
+@media(max-width:600px){
+  .header{padding:0 16px}
+  .page{padding:16px 12px}
+  .stats{grid-template-columns:repeat(2,1fr);gap:10px}
+  .stat-card{padding:14px}
+  .stat-body .stat-value{font-size:22px}
+  .form-grid{grid-template-columns:1fr}
+  .brand-info p{display:none}
+  .header-date{display:none}
+  .phone-btn span{display:none}
+  .phone-btn{padding:8px 10px}
+  .footer-inner{flex-direction:column;align-items:center;text-align:center;padding:24px 16px}
+  .footer-contact{order:1}
+  .footer-qr-wrap{order:2}
+  .footer-brand{order:3}
+}
+
+/* ===== زر بريد عائم (Outlook) ===== */
+.fab-stack{position:fixed;bottom:24px;left:24px;z-index:500;display:flex;flex-direction:column;gap:12px}
+.fab{width:56px;height:56px;border-radius:50%;border:none;cursor:pointer;display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-lg);transition:transform .25s,box-shadow .25s;color:#fff}
+.fab:hover{transform:translateY(-3px)}
+.fab svg{width:28px;height:28px}
+.fab-email{background:var(--accent);position:relative}
+.fab-email:hover{background:var(--info)}
+.fab-email::after{content:"";position:absolute;inset:0;border-radius:50%;border:2px solid var(--accent);animation:fabPulse 2.2s ease-out infinite}
+@keyframes fabPulse{0%{transform:scale(1);opacity:.7}100%{transform:scale(1.6);opacity:0}}
+@media (prefers-reduced-motion: reduce){.fab-email::after{animation:none}}
+
+/* ===== مؤشّر المزامنة ===== */
+.sync-badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:8px 13px;border-radius:var(--radius-sm);border:1px solid rgba(255,255,255,.14);white-space:nowrap}
+.sync-badge i{font-size:15px}
+.sync-cloud{background:rgba(74,222,128,.12);color:#4ade80}
+.sync-connecting{background:rgba(255,255,255,.09);color:rgba(255,255,255,.7)}
+.sync-local{background:rgba(251,191,36,.14);color:#fbbf24}
+
+/* ===== زر الخروج ===== */
+.lock-btn{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.14);border-radius:var(--radius-sm);padding:8px 14px;cursor:pointer;color:#fff;font-size:13px;font-weight:700;font-family:'Tajawal',sans-serif;white-space:nowrap;transition:background .15s}
+.lock-btn i{font-size:16px}
+.lock-btn:hover{background:rgba(255,255,255,.18)}
+
+/* ===== بوابة الدخول ===== */
+body.locked-body{overflow:hidden}
+.login-gate{position:fixed;inset:0;z-index:2000;background:linear-gradient(135deg,#0f172a 0%,#1e293b 100%);display:flex;align-items:center;justify-content:center;padding:20px}
+.login-gate.hidden{display:none}
+.login-box{background:var(--surface);border-radius:16px;box-shadow:0 25px 60px rgba(0,0,0,.4);width:100%;max-width:380px;padding:36px 32px;text-align:center}
+.login-logo{height:72px;width:auto;border-radius:12px;background:#fff;padding:6px;margin:0 auto 18px;display:block;box-shadow:var(--shadow)}
+.login-box h2{font-size:19px;font-weight:800;color:var(--text);margin-bottom:6px}
+.login-box .login-sub{font-size:13px;color:var(--text-muted);margin-bottom:24px}
+.login-field{position:relative;margin-bottom:14px}
+.login-field input{width:100%;padding:13px 16px;border:1px solid var(--border);border-radius:var(--radius-sm);font-size:16px;font-family:'Tajawal',sans-serif;text-align:center;letter-spacing:4px;direction:ltr;transition:border-color .15s,box-shadow .15s}
+.login-field input:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(37,99,235,.14)}
+.login-btn{width:100%;background:var(--accent);color:#fff;border:none;padding:13px;border-radius:var(--radius-sm);font-size:15px;font-weight:700;font-family:'Tajawal',sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:background .15s}
+.login-btn:hover{background:#1d4ed8}
+.login-error{display:none;color:var(--danger);font-size:13px;font-weight:600;margin-bottom:12px;align-items:center;justify-content:center;gap:6px}
+.login-error.show{display:flex}
+.login-foot{font-size:11px;color:var(--text-light);margin-top:20px}
+
+/* ===== نافذة التعديل (Modal) ===== */
+.modal-overlay{position:fixed;inset:0;background:rgba(15,23,42,.55);display:flex;align-items:center;justify-content:center;z-index:1000;padding:20px;backdrop-filter:blur(2px)}
+.modal-overlay.hidden{display:none}
+.modal{background:var(--surface);border-radius:var(--radius);box-shadow:var(--shadow-lg);width:100%;max-width:580px;max-height:92vh;overflow-y:auto;animation:modalIn .18s ease-out}
+@keyframes modalIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.modal-head{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--border)}
+.modal-head h3{font-size:16px;font-weight:700;display:flex;align-items:center;gap:8px;color:var(--text)}
+.modal-close{background:transparent;border:none;cursor:pointer;font-size:22px;color:var(--text-muted);width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;transition:background .12s}
+.modal-close:hover{background:var(--bg);color:var(--text)}
+.modal-body{padding:22px}
+.modal-body .form-grid{grid-template-columns:repeat(2,1fr)}
+.modal-foot{display:flex;gap:10px;justify-content:flex-start;padding:16px 22px;border-top:1px solid var(--border)}
+.btn-ghost{background:var(--surface);color:var(--text-muted);border:1px solid var(--border);padding:11px 22px;border-radius:var(--radius-sm);cursor:pointer;font-size:14px;font-family:'Tajawal',sans-serif;font-weight:600;transition:background .12s}
+.btn-ghost:hover{background:var(--bg)}
+.actions-cell{display:flex;gap:6px}
+.btn-edit:hover{background:var(--accent-light);color:var(--accent);border-color:var(--accent)}
+@media(max-width:600px){.modal-body .form-grid{grid-template-columns:1fr}.sync-badge span{display:none}.sync-badge{padding:8px}}
+</style>
+</head>
+<body class="locked-body">
+
+<!-- Login Gate -->
+<div class="login-gate" id="login-gate">
+  <div class="login-box">
+    <img class="login-logo" src="Logo Al shaabat.jpeg" alt="شعار الشعبات">
+    <h2>منصة صيانة المعدّات</h2>
+    <div class="login-sub">صفحة خاصة بموظفي مؤسسة الشعبات</div>
+    <div class="login-error" id="login-error"><i class="ti ti-alert-circle"></i> كلمة المرور غير صحيحة</div>
+    <div class="login-field">
+      <input type="password" id="login-pass" inputmode="numeric" placeholder="كلمة المرور" autocomplete="off" onkeydown="if(event.key==='Enter')submitLogin()">
+    </div>
+    <button type="button" class="login-btn" onclick="submitLogin()"><i class="ti ti-login"></i> دخول</button>
+    <div class="login-foot"><i class="ti ti-lock icon-sm"></i> الوصول للموظفين المصرّح لهم فقط</div>
+  </div>
+</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-inner">
+    <div class="brand">
+      <img class="brand-logo" src="Logo Al shaabat.jpeg" alt="شعار الشعبات">
+      <div class="brand-sep"></div>
+      <div class="brand-info">
+        <h1>منصة صيانة المعدّات</h1>
+        <p>مؤسسة الشعبات للتجارة · إدارة الأصول والصيانة الدوريّة</p>
+      </div>
+    </div>
+    <div class="header-right">
+      <a href="tel:0572693653" class="phone-btn">
+        <i class="ti ti-phone-call"></i>
+        <span>0572693653</span>
+      </a>
+      <button type="button" class="qr-toggle-btn" onclick="toggleQR()" title="عرض QR Code">
+        <i class="ti ti-qrcode"></i>
+      </button>
+      <button type="button" class="lock-btn" id="logout-btn" onclick="logout()" title="تسجيل الخروج"><i class="ti ti-logout"></i> <span>خروج</span></button>
+      <div class="sync-badge sync-connecting" id="sync-status" title="حالة المزامنة"><i class="ti ti-cloud"></i> <span>…</span></div>
+      <div class="header-date">
+        <div class="date-label">اليوم</div>
+        <div class="date-val" id="today-date"></div>
+      </div>
+      <!-- QR Popup -->
+      <div class="qr-popup hidden" id="qr-popup">
+        <div class="qr-popup-title"><i class="ti ti-scan icon-sm"></i> امسح للاتصال</div>
+        <div id="qr-canvas"></div>
+        <div class="qr-popup-phone"><i class="ti ti-phone icon-sm"></i> 0572693653</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class="page">
+
+  <!-- Stats -->
+  <div class="stats">
+    <div class="stat-card">
+      <div class="stat-icon total"><i class="ti ti-tools"></i></div>
+      <div class="stat-body">
+        <div class="stat-label">إجمالي المعدّات</div>
+        <div class="stat-value" id="stat-total">0</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon ok"><i class="ti ti-circle-check"></i></div>
+      <div class="stat-body">
+        <div class="stat-label">تعمل بكفاءة</div>
+        <div class="stat-value c-ok" id="stat-ok">0</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon warn"><i class="ti ti-alert-triangle"></i></div>
+      <div class="stat-body">
+        <div class="stat-label">تحتاج صيانة</div>
+        <div class="stat-value c-warn" id="stat-warn">0</div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon danger"><i class="ti ti-ban"></i></div>
+      <div class="stat-body">
+        <div class="stat-label">معطّلة</div>
+        <div class="stat-value c-danger" id="stat-down">0</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Card -->
+  <div class="card">
+    <div class="tabs">
+      <button type="button" class="tab-btn active" data-tab="equipment"><i class="ti ti-list-details"></i>المعدّات</button>
+      <button type="button" class="tab-btn" data-tab="upcoming"><i class="ti ti-calendar-event"></i>الصيانة القادمة</button>
+      <button type="button" class="tab-btn" data-tab="log"><i class="ti ti-history"></i>سجلّ الصيانة</button>
+      <button type="button" class="tab-btn" data-tab="add-equip"><i class="ti ti-plus"></i>إضافة معدّة</button>
+      <button type="button" class="tab-btn highlight" data-tab="add-log"><i class="ti ti-clipboard-plus"></i>تسجيل صيانة</button>
+    </div>
+
+    <!-- Equipment Tab -->
+    <div class="section" id="sec-equipment">
+      <div class="toolbar">
+        <input type="text" id="search-eq" placeholder="&#xf52a;  بحث في المعدّات بالاسم أو الموقع...">
+        <select id="filter-status" title="تصفية حسب الحالة" aria-label="تصفية حسب الحالة">
+          <option value="all">جميع الحالات</option>
+          <option value="تعمل">تعمل</option>
+          <option value="تحتاج صيانة">تحتاج صيانة</option>
+          <option value="تحت الصيانة">تحت الصيانة</option>
+          <option value="معطّلة">معطّلة</option>
+        </select>
+      </div>
+      <div class="table-wrap">
+        <table class="tbl">
+          <thead>
+            <tr>
+              <th>المعدّة</th>
+              <th class="hide-sm">الموقع</th>
+              <th>الحالة</th>
+              <th class="hide-sm">الصيانة القادمة</th>
+              <th class="th-actions"><span class="visually-hidden">إجراءات</span></th>
+            </tr>
+          </thead>
+          <tbody id="equip-list"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Upcoming Tab -->
+    <div class="section hidden" id="sec-upcoming">
+      <div id="upcoming-list"></div>
+    </div>
+
+    <!-- Log Tab -->
+    <div class="section hidden" id="sec-log">
+      <div id="log-list"></div>
+    </div>
+
+    <!-- Add Equipment Tab -->
+    <div class="section hidden" id="sec-add-equip">
+      <div class="form-section">
+        <h3><i class="ti ti-info-circle"></i> بيانات المعدّة</h3>
+        <div class="form-grid">
+          <div class="field field-span-2">
+            <label>اسم المعدّة</label>
+            <input type="text" id="eq-name" placeholder="مثال: مكيّف الطابق الأول">
+          </div>
+          <div class="field">
+            <label>النوع</label>
+            <select id="eq-type">
+              <option>تكييف</option>
+              <option>مولّد كهرباء</option>
+              <option>مضخّة</option>
+              <option>رافعة</option>
+              <option>حاسوب</option>
+              <option>طابعة</option>
+              <option>مركبة</option>
+              <option>آلة تصنيع</option>
+              <option>أجهزة شبكة</option>
+              <option>أخرى</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>الموقع</label>
+            <input type="text" id="eq-location" placeholder="مثال: الطابق الثاني">
+          </div>
+          <div class="field">
+            <label>الحالة الحالية</label>
+            <select id="eq-status">
+              <option>تعمل</option>
+              <option>تحتاج صيانة</option>
+              <option>تحت الصيانة</option>
+              <option>معطّلة</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>تاريخ الاستلام</label>
+            <input type="date" id="eq-purchase">
+          </div>
+          <div class="field">
+            <label>موعد الصيانة القادمة</label>
+            <input type="date" id="eq-next">
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-primary" onclick="addEquipment()"><i class="ti ti-device-floppy"></i>حفظ المعدّة</button>
+      </div>
+    </div>
+
+    <!-- Add Log Tab -->
+    <div class="section hidden" id="sec-add-log">
+      <div class="form-section">
+        <h3><i class="ti ti-clipboard-list"></i> تفاصيل الصيانة</h3>
+        <div class="form-grid">
+          <div class="field">
+            <label>المعدّة</label>
+            <select id="log-eq"></select>
+          </div>
+          <div class="field">
+            <label>نوع الصيانة</label>
+            <select id="log-type">
+              <option>دوريّة</option>
+              <option>إصلاح</option>
+              <option>فحص</option>
+              <option>استبدال قطع</option>
+            </select>
+          </div>
+          <div class="field">
+            <label>التاريخ</label>
+            <input type="date" id="log-date">
+          </div>
+          <div class="field">
+            <label>الفنّي المسؤول</label>
+            <input type="text" id="log-tech" placeholder="اسم الفنّي">
+          </div>
+          <div class="field">
+            <label>التكلفة (ر.س)</label>
+            <input type="number" id="log-cost" min="0" step="1" placeholder="0">
+          </div>
+          <div class="field">
+            <label>موعد الصيانة القادمة</label>
+            <input type="date" id="log-next">
+          </div>
+          <div class="field field-span-3">
+            <label>تفاصيل العمل المنجز / ملاحظات</label>
+            <textarea id="log-notes" rows="3" placeholder="صف العمل الذي تم إنجازه..."></textarea>
+          </div>
+        </div>
+      </div>
+      <div class="form-actions">
+        <button type="button" class="btn-primary" onclick="addLog()"><i class="ti ti-device-floppy"></i>حفظ السجلّ</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Edit Equipment Modal -->
+<div class="modal-overlay hidden" id="edit-modal">
+  <div class="modal">
+    <div class="modal-head">
+      <h3><i class="ti ti-edit"></i> تعديل بيانات المعدّة</h3>
+      <button type="button" class="modal-close" onclick="closeEditModal()" title="إغلاق"><i class="ti ti-x"></i></button>
+    </div>
+    <div class="modal-body">
+      <input type="hidden" id="edit-id">
+      <div class="form-grid">
+        <div class="field field-span-2">
+          <label>اسم المعدّة</label>
+          <input type="text" id="edit-name" placeholder="اسم المعدّة">
+        </div>
+        <div class="field">
+          <label>النوع</label>
+          <select id="edit-type">
+            <option>تكييف</option>
+            <option>مولّد كهرباء</option>
+            <option>مضخّة</option>
+            <option>رافعة</option>
+            <option>حاسوب</option>
+            <option>طابعة</option>
+            <option>مركبة</option>
+            <option>آلة تصنيع</option>
+            <option>أجهزة شبكة</option>
+            <option>أخرى</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>الموقع</label>
+          <input type="text" id="edit-location" placeholder="مثال: الطابق الثاني">
+        </div>
+        <div class="field">
+          <label>الحالة الحالية</label>
+          <select id="edit-status">
+            <option>تعمل</option>
+            <option>تحتاج صيانة</option>
+            <option>تحت الصيانة</option>
+            <option>معطّلة</option>
+          </select>
+        </div>
+        <div class="field">
+          <label>تاريخ الاستلام</label>
+          <input type="date" id="edit-purchase">
+        </div>
+        <div class="field">
+          <label>موعد الصيانة القادمة</label>
+          <input type="date" id="edit-next">
+        </div>
+      </div>
+    </div>
+    <div class="modal-foot">
+      <button type="button" class="btn-primary" onclick="saveEquipEdit()"><i class="ti ti-device-floppy"></i> حفظ التعديلات</button>
+      <button type="button" class="btn-ghost" onclick="closeEditModal()">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <img class="footer-logo" src="Logo Al shaabat.jpeg" alt="شعار الشعبات">
+      <div>
+        <div class="footer-name">مؤسسة الشعبات للتجارة</div>
+        <div class="footer-sub">Al Shaabat Trading Est</div>
+      </div>
+    </div>
+    <div class="footer-contact">
+      <div class="footer-contact-lbl">للتواصل والاستفسار</div>
+      <a href="tel:0572693653" class="footer-phone-link">
+        <i class="ti ti-phone-call"></i>
+        <span>0572693653</span>
+      </a>
+    </div>
+    <div class="footer-qr-wrap">
+      <div id="footer-qr-canvas"></div>
+      <div class="footer-qr-lbl"><i class="ti ti-scan icon-sm"></i> امسح للاتصال</div>
+    </div>
+  </div>
+  <div class="footer-copy">
+    &copy; 2026 مؤسسة الشعبات للتجارة &nbsp;·&nbsp; جميع الحقوق محفوظة
+  </div>
+</footer>
+
+<script>
+const KEY='shaahat-maintenance-data-v1';
+let state={equipment:[],logs:[]};
+
+/* ═══════════════════════════════════════════════════════════════
+   إعداد Firebase — الصق هنا إعدادات مشروعك (من خطوات الإعداد)
+   استبدل القيم التي تبدأ بـ PASTE_ بقيمك الحقيقية.
+   ما دامت databaseURL تحتوي على PASTE_ ستعمل الصفحة محلياً فقط.
+   ═══════════════════════════════════════════════════════════════ */
+const firebaseConfig={
+  apiKey:"AIzaSyDJ9_N1jcctkX9mpiqbyoIZ4kdBac4d3RY",
+  authDomain:"lshaabat-maintenance.firebaseapp.com",
+  databaseURL:"https://lshaabat-maintenance-default-rtdb.firebaseio.com",
+  projectId:"lshaabat-maintenance",
+  storageBucket:"lshaabat-maintenance.firebasestorage.app",
+  messagingSenderId:"545274622315",
+  appId:"1:545274622315:web:42884f45645e759ee21c2e"
+};
+
+let cloudDB=null, applyingRemote=false;
+const cloudConfigured=()=>firebaseConfig.databaseURL && !firebaseConfig.databaseURL.includes('PASTE_');
+
+function setSyncStatus(mode){
+  const el=document.getElementById('sync-status');
+  if(!el)return;
+  if(mode==='cloud'){el.className='sync-badge sync-cloud';el.innerHTML='<i class="ti ti-cloud-check"></i> <span>متزامن سحابياً</span>';el.title='البيانات تُحفظ تلقائياً وتظهر على كل الأجهزة';}
+  else if(mode==='connecting'){el.className='sync-badge sync-connecting';el.innerHTML='<i class="ti ti-cloud"></i> <span>جارٍ الاتصال…</span>';el.title='جارٍ الاتصال بالسحابة';}
+  else{el.className='sync-badge sync-local';el.innerHTML='<i class="ti ti-cloud-off"></i> <span>محلي فقط</span>';el.title='لم يتم إعداد المزامنة — البيانات محفوظة على هذا الجهاز فقط';}
+}
+
+function initCloud(){
+  if(!cloudConfigured()){setSyncStatus('local');return;}
+  if(typeof firebase==='undefined'){setSyncStatus('local');return;}
+  setSyncStatus('connecting');
+  try{
+    firebase.initializeApp(firebaseConfig);
+    cloudDB=firebase.database();
+    const ref=cloudDB.ref('maintenance');
+    ref.on('value',snap=>{
+      const val=snap.val();
+      if(val){
+        // وصلت بيانات من السحابة — اعتمدها واعرضها على هذا الجهاز
+        applyingRemote=true;
+        state={equipment:val.equipment||[],logs:val.logs||[]};
+        localStorage.setItem(KEY,JSON.stringify(state));
+        applyingRemote=false;
+        render();
+      }else{
+        // السحابة فارغة لأول مرة — ارفع البيانات الحالية إليها
+        ref.set(state);
+      }
+      setSyncStatus('cloud');
+    },()=>setSyncStatus('local'));
+  }catch(e){setSyncStatus('local');}
+}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+const fmtDate=s=>{if(!s)return'—';try{return new Date(s).toLocaleDateString('ar-SA')}catch(e){return s}};
+const daysUntil=s=>{if(!s)return null;return Math.ceil((new Date(s)-new Date())/86400000)};
+const escapeHtml=s=>String(s||'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ═══════════════════════════════════════════════════════════════
+   بوابة الدخول — صفحة خاصة بالموظفين
+   كلمة المرور الحالية: 103040
+   لتغييرها: افتح وحدة تحكّم المتصفح (F12 → Console) واكتب:
+       await sha256('كلمتك_الجديدة')
+   ثم انسخ النص الناتج وضعه مكان قيمة ACCESS_HASH أدناه.
+   ═══════════════════════════════════════════════════════════════ */
+const ACCESS_HASH='e5a5dbc761d2c5aed8746ad69e2a4f54b4441b67fa9893e62250110c7e35889c';
+let authed=sessionStorage.getItem('shaabat-auth')==='1';
+
+async function sha256(s){
+  const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));
+  return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('');
+}
+
+function showApp(){
+  authed=true;
+  document.getElementById('login-gate').classList.add('hidden');
+  document.body.classList.remove('locked-body');
+}
+
+async function submitLogin(){
+  const inp=document.getElementById('login-pass');
+  const err=document.getElementById('login-error');
+  let h='';try{h=await sha256(inp.value)}catch(e){}
+  if(h===ACCESS_HASH){
+    sessionStorage.setItem('shaabat-auth','1');
+    err.classList.remove('show');
+    showApp();
+  }else{
+    err.classList.add('show');
+    inp.value='';inp.focus();
+  }
+}
+
+function logout(){
+  authed=false;
+  sessionStorage.removeItem('shaabat-auth');
+  document.body.classList.add('locked-body');
+  const gate=document.getElementById('login-gate');
+  gate.classList.remove('hidden');
+  const inp=document.getElementById('login-pass');
+  inp.value='';inp.focus();
+}
+
+function initAuth(){
+  if(authed){showApp();}
+  else{document.getElementById('login-pass').focus();}
+}
+
+const typeIcon={
+  'تكييف':'ti-air-conditioning','مولّد كهرباء':'ti-bolt','مضخّة':'ti-engine',
+  'رافعة':'ti-forklift','حاسوب':'ti-device-desktop','طابعة':'ti-printer',
+  'مركبة':'ti-truck','آلة تصنيع':'ti-settings','أجهزة شبكة':'ti-server','أخرى':'ti-tool'
+};
+
+const statusBadge=s=>{
+  const m={'تعمل':'b-ok','تحتاج صيانة':'b-warn','تحت الصيانة':'b-info','معطّلة':'b-danger'};
+  return `<span class="badge ${m[s]||'b-ok'}">${s}</span>`;
+};
+
+function load(){
+  const stored=localStorage.getItem(KEY);
+  if(stored){try{state=JSON.parse(stored)}catch(e){seedData()}}
+  else{seedData()}
+  render();
+  initCloud();
+}
+
+function seedData(){
+  const e1=uid(),e2=uid(),e3=uid(),e4=uid(),e5=uid();
+  state={
+    equipment:[
+      {id:e1,name:'مكيّف مركزي - مكتب الإدارة',type:'تكييف',location:'الطابق الثاني',status:'تعمل',purchase:'2023-05-01',next:'2026-08-15'},
+      {id:e2,name:'مولّد كهرباء احتياطي',type:'مولّد كهرباء',location:'المبنى الرئيسي',status:'تحتاج صيانة',purchase:'2021-08-20',next:'2026-05-15'},
+      {id:e3,name:'مضخّة مياه رقم 1',type:'مضخّة',location:'القبو',status:'معطّلة',purchase:'2020-03-15',next:'2026-05-05'},
+      {id:e4,name:'رافعة شوكية',type:'رافعة',location:'المستودع',status:'تعمل',purchase:'2022-11-10',next:'2026-10-01'},
+      {id:e5,name:'خادم البيانات الرئيسي',type:'أجهزة شبكة',location:'غرفة الخوادم',status:'تحت الصيانة',purchase:'2023-02-01',next:'2026-05-20'}
+    ],
+    logs:[
+      {id:uid(),eqId:e1,date:'2026-04-12',type:'دوريّة',tech:'محمد العتيبي',cost:350,notes:'تنظيف الفلاتر واستبدال غاز التبريد'},
+      {id:uid(),eqId:e2,date:'2026-03-20',type:'فحص',tech:'سعد القحطاني',cost:0,notes:'الفحص أظهر تآكلًا في حزام المحرّك — مطلوب استبداله'},
+      {id:uid(),eqId:e4,date:'2026-02-08',type:'استبدال قطع',tech:'محمد العتيبي',cost:1200,notes:'استبدال إطارات وفلتر زيت'}
+    ]
+  };
+  save();
+}
+
+function save(){
+  localStorage.setItem(KEY,JSON.stringify(state));
+  if(cloudDB&&!applyingRemote){cloudDB.ref('maintenance').set(state);}
+}
+function render(){renderStats();renderEquipment();renderUpcoming();renderLog();renderLogEqSelect()}
+
+function renderStats(){
+  const eq=state.equipment;
+  document.getElementById('stat-total').textContent=eq.length;
+  document.getElementById('stat-ok').textContent=eq.filter(e=>e.status==='تعمل').length;
+  document.getElementById('stat-warn').textContent=eq.filter(e=>e.status==='تحتاج صيانة'||e.status==='تحت الصيانة').length;
+  document.getElementById('stat-down').textContent=eq.filter(e=>e.status==='معطّلة').length;
+}
+
+function renderEquipment(){
+  const tbody=document.getElementById('equip-list');
+  const q=(document.getElementById('search-eq').value||'').trim();
+  const fl=document.getElementById('filter-status').value;
+  let items=state.equipment;
+  if(q)items=items.filter(e=>(e.name+e.type+e.location).includes(q));
+  if(fl!=='all')items=items.filter(e=>e.status===fl);
+  if(items.length===0){
+    tbody.innerHTML=`<tr><td colspan="5"><div class="empty"><i class="ti ti-tool"></i><p>لا توجد معدّات لعرضها</p></div></td></tr>`;
+    return;
+  }
+  tbody.innerHTML=items.map(e=>{
+    const d=daysUntil(e.next);
+    let dl=fmtDate(e.next);
+    if(d!==null){
+      if(d<0)dl=`<span class="dl-late"><i class="ti ti-alert-circle icon-sm"></i> متأخّرة ${Math.abs(d)} يوم</span>`;
+      else if(d===0)dl=`<span class="dl-late">اليوم</span>`;
+      else if(d<=7)dl=`<span class="dl-soon">${dl} · خلال ${d} يوم</span>`;
+    }
+    const icon=typeIcon[e.type]||'ti-tool';
+    return `<tr>
+<td>
+  <div class="eq-cell">
+    <div class="eq-cell-icon"><i class="ti ${icon}"></i></div>
+    <div>
+      <div class="eq-name">${escapeHtml(e.name)}</div>
+      <div class="eq-sub">${escapeHtml(e.type)}</div>
+    </div>
+  </div>
+</td>
+<td class="hide-sm td-location">${escapeHtml(e.location)}</td>
+<td>${statusBadge(e.status)}</td>
+<td class="hide-sm td-deadline">${dl}</td>
+<td>
+  <div class="actions-cell">
+    <button type="button" class="btn-icon btn-edit" onclick="editEquip('${e.id}')" title="تعديل المعدّة"><i class="ti ti-pencil"></i></button>
+    <button type="button" class="btn-icon" onclick="delEquip('${e.id}')" title="حذف المعدّة"><i class="ti ti-trash"></i></button>
+  </div>
+</td>
+</tr>`;
+  }).join('');
+}
+
+function renderUpcoming(){
+  const list=document.getElementById('upcoming-list');
+  const items=state.equipment.filter(e=>e.next).map(e=>({...e,days:daysUntil(e.next)})).sort((a,b)=>a.days-b.days);
+  if(items.length===0){
+    list.innerHTML=`<div class="empty"><i class="ti ti-calendar-off"></i><p>لا توجد صيانة مجدولة</p></div>`;
+    return;
+  }
+  list.innerHTML=items.map(e=>{
+    let u='',cls='urgency-normal',icon='ti-calendar-event';
+    if(e.days<0){u=`متأخّرة ${Math.abs(e.days)} يوم`;cls='urgency-danger';icon='ti-calendar-x'}
+    else if(e.days===0){u='اليوم';cls='urgency-danger';icon='ti-calendar-exclamation'}
+    else if(e.days<=7){u=`خلال ${e.days} يوم`;cls='urgency-warning';icon='ti-calendar-due'}
+    else{u=`خلال ${e.days} يوم`}
+    const eqIcon=typeIcon[e.type]||'ti-tool';
+    return `<div class="upcoming-item">
+<div class="upcoming-left">
+  <div class="upcoming-icon"><i class="ti ${eqIcon}"></i></div>
+  <div>
+    <div class="upcoming-name">${escapeHtml(e.name)}</div>
+    <div class="upcoming-sub">${escapeHtml(e.type)} · ${escapeHtml(e.location)}</div>
+  </div>
+</div>
+<div class="upcoming-right">
+  <div class="upcoming-urgency ${cls}"><i class="ti ${icon} icon-sm"></i> ${u}</div>
+  <div class="upcoming-date">${fmtDate(e.next)}</div>
+</div>
+</div>`;
+  }).join('');
+}
+
+function renderLog(){
+  const list=document.getElementById('log-list');
+  if(state.logs.length===0){
+    list.innerHTML=`<div class="empty"><i class="ti ti-history"></i><p>لا توجد سجلّات صيانة بعد</p></div>`;
+    return;
+  }
+  const map=Object.fromEntries(state.equipment.map(e=>[e.id,e.name]));
+  const sorted=[...state.logs].sort((a,b)=>new Date(b.date)-new Date(a.date));
+  const totalCost=state.logs.reduce((s,l)=>s+(parseFloat(l.cost)||0),0);
+  const summary=`<div class="summary-bar">
+<span class="cost-label"><i class="ti ti-receipt icon-md"></i> إجمالي تكاليف الصيانة المسجّلة</span>
+<span class="summary-cost">${Math.round(totalCost).toLocaleString('ar-SA')} ر.س</span>
+</div>`;
+  list.innerHTML=summary+sorted.map(l=>`<div class="log-entry">
+<div class="log-entry-body">
+  <div class="log-entry-name">${escapeHtml(map[l.eqId]||'معدّة محذوفة')}</div>
+  <div class="log-meta-row">
+    <span class="badge b-info badge-sm">${escapeHtml(l.type)}</span>
+    <span class="log-meta-dot">·</span>
+    <span><i class="ti ti-calendar icon-sm"></i> ${fmtDate(l.date)}</span>
+    ${l.tech?`<span class="log-meta-dot">·</span><span><i class="ti ti-user icon-sm"></i> ${escapeHtml(l.tech)}</span>`:''}
+    ${l.cost?`<span class="log-meta-dot">·</span><span class="log-cost-val">${Math.round(l.cost).toLocaleString('ar-SA')} ر.س</span>`:''}
+  </div>
+  ${l.notes?`<div class="log-entry-notes">${escapeHtml(l.notes)}</div>`:''}
+</div>
+<button type="button" class="btn-icon" onclick="delLog('${l.id}')" title="حذف السجلّ"><i class="ti ti-trash"></i></button>
+</div>`).join('');
+}
+
+function renderLogEqSelect(){
+  const sel=document.getElementById('log-eq');
+  if(state.equipment.length===0){sel.innerHTML='<option value="">— يرجى إضافة معدّة أولًا —</option>';return}
+  sel.innerHTML=state.equipment.map(e=>`<option value="${e.id}">${escapeHtml(e.name)}</option>`).join('');
+}
+
+function addEquipment(){
+  const name=document.getElementById('eq-name').value.trim();
+  if(!name){alert('يرجى إدخال اسم المعدّة');return}
+  state.equipment.push({
+    id:uid(),name,
+    type:document.getElementById('eq-type').value,
+    location:document.getElementById('eq-location').value.trim()||'—',
+    status:document.getElementById('eq-status').value,
+    purchase:document.getElementById('eq-purchase').value,
+    next:document.getElementById('eq-next').value
+  });
+  save();
+  ['eq-name','eq-location','eq-purchase','eq-next'].forEach(id=>document.getElementById(id).value='');
+  render();switchTab('equipment');
+}
+
+function addLog(){
+  const eqId=document.getElementById('log-eq').value;
+  if(!eqId){alert('يرجى اختيار معدّة');return}
+  const nextDate=document.getElementById('log-next').value;
+  state.logs.push({
+    id:uid(),eqId,
+    date:document.getElementById('log-date').value||new Date().toISOString().slice(0,10),
+    type:document.getElementById('log-type').value,
+    tech:document.getElementById('log-tech').value.trim(),
+    cost:parseFloat(document.getElementById('log-cost').value)||0,
+    notes:document.getElementById('log-notes').value.trim()
+  });
+  if(nextDate){const eq=state.equipment.find(e=>e.id===eqId);if(eq)eq.next=nextDate}
+  save();
+  ['log-tech','log-cost','log-notes','log-next'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('log-date').value=new Date().toISOString().slice(0,10);
+  render();switchTab('log');
+}
+
+function delEquip(id){
+  if(!confirm('هل تريد حذف هذه المعدّة؟ سيتم حذف سجلّات صيانتها أيضًا.'))return;
+  state.equipment=state.equipment.filter(e=>e.id!==id);
+  state.logs=state.logs.filter(l=>l.eqId!==id);
+  save();render();
+}
+
+function delLog(id){
+  if(!confirm('هل تريد حذف هذا السجلّ؟'))return;
+  state.logs=state.logs.filter(l=>l.id!==id);
+  save();render();
+}
+
+function editEquip(id){
+  const e=state.equipment.find(x=>x.id===id);
+  if(!e)return;
+  document.getElementById('edit-id').value=e.id;
+  document.getElementById('edit-name').value=e.name||'';
+  document.getElementById('edit-type').value=e.type||'أخرى';
+  document.getElementById('edit-location').value=(e.location&&e.location!=='—')?e.location:'';
+  document.getElementById('edit-status').value=e.status||'تعمل';
+  document.getElementById('edit-purchase').value=e.purchase||'';
+  document.getElementById('edit-next').value=e.next||'';
+  document.getElementById('edit-modal').classList.remove('hidden');
+}
+
+function closeEditModal(){
+  document.getElementById('edit-modal').classList.add('hidden');
+}
+
+function saveEquipEdit(){
+  const id=document.getElementById('edit-id').value;
+  const e=state.equipment.find(x=>x.id===id);
+  if(!e){closeEditModal();return}
+  const name=document.getElementById('edit-name').value.trim();
+  if(!name){alert('يرجى إدخال اسم المعدّة');return}
+  e.name=name;
+  e.type=document.getElementById('edit-type').value;
+  e.location=document.getElementById('edit-location').value.trim()||'—';
+  e.status=document.getElementById('edit-status').value;
+  e.purchase=document.getElementById('edit-purchase').value;
+  e.next=document.getElementById('edit-next').value;
+  save();render();closeEditModal();
+}
+
+function switchTab(tab){
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.toggle('active',b.dataset.tab===tab));
+  ['equipment','upcoming','log','add-equip','add-log'].forEach(s=>{
+    const el=document.getElementById('sec-'+s);
+    if(el)el.classList.toggle('hidden',s!==tab);
+  });
+}
+
+document.querySelectorAll('.tab-btn').forEach(b=>b.addEventListener('click',()=>switchTab(b.dataset.tab)));
+document.getElementById('search-eq').addEventListener('input',renderEquipment);
+document.getElementById('filter-status').addEventListener('change',renderEquipment);
+document.getElementById('today-date').textContent=new Date().toLocaleDateString('ar-SA',{weekday:'long',year:'numeric',month:'long',day:'numeric'});
+document.getElementById('log-date').value=new Date().toISOString().slice(0,10);
+
+load();
+initAuth();
+
+// إغلاق نافذة التعديل عند الضغط على الخلفية أو زر Escape
+document.getElementById('edit-modal').addEventListener('click',function(e){
+  if(e.target===this)closeEditModal();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape')closeEditModal();
+});
+
+// ── QR Code ──
+const QR_TEXT='tel:0572693653';
+let headerQRInit=false;
+
+function toggleQR(){
+  const popup=document.getElementById('qr-popup');
+  popup.classList.toggle('hidden');
+  if(!headerQRInit&&!popup.classList.contains('hidden')){
+    new QRCode(document.getElementById('qr-canvas'),{
+      text:QR_TEXT,width:150,height:150,
+      colorDark:'#0f172a',colorLight:'#ffffff',
+      correctLevel:QRCode.CorrectLevel.H
+    });
+    headerQRInit=true;
+  }
+}
+
+document.addEventListener('click',function(e){
+  const popup=document.getElementById('qr-popup');
+  const hr=document.querySelector('.header-right');
+  if(!popup.classList.contains('hidden')&&hr&&!hr.contains(e.target)){
+    popup.classList.add('hidden');
+  }
+});
+
+window.addEventListener('load',function(){
+  if(typeof QRCode!=='undefined'){
+    new QRCode(document.getElementById('footer-qr-canvas'),{
+      text:QR_TEXT,width:96,height:96,
+      colorDark:'#ffffff',colorLight:'#0f172a',
+      correctLevel:QRCode.CorrectLevel.H
+    });
+  }
+});
+</script>
+
+<!-- ===== زر بريد عائم (Outlook) ===== -->
+<div class="fab-stack">
+  <a class="fab fab-email" href="https://outlook.live.com/mail/0/deeplink/compose?to=alshabaat@alshabaat.com&subject=استفسار%20-%20صيانة%20المعدّات&body=السلام%20عليكم،%0D%0A%0D%0Aأرغب%20في%20الاستفسار%20عن:" target="_blank" rel="noopener" aria-label="تواصل عبر Outlook" title="راسلنا عبر Outlook على alshabaat@alshabaat.com">
+    <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
+  </a>
+</div>
+</body>
+</html>
